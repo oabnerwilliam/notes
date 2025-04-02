@@ -1,11 +1,29 @@
 import React from 'react'
 import style from './Navbar.module.css'
+import { Link } from 'react-router-dom'
+
+import Container from './Container'
 
 const Navbar = () => {
   return (
-    <div className={style.navbar}>
-        <h1>NOTES</h1>
-    </div>
+    <>
+        <nav className={style.navbar}>
+            <Container>
+                <Link to="/"><h1>NOTES</h1></Link>
+                <ul>
+                    <li>
+                        <Link to="/">Início</Link>
+                    </li>
+                    <li>
+                        <Link to="/createnote">Criar Nota</Link>
+                    </li>
+                    <li>
+                        <Link to="/mynotes">Minhas Notas</Link>
+                    </li>
+                </ul>    
+            </Container>
+        </nav>
+    </>
   )
 }
 

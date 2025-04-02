@@ -1,8 +1,40 @@
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
+    padding: 2em;
     background-color: black;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: auto;
+    gap: 1em;
+    font-size: 1.2em;
+}
+
+.navbar a {
     color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    &:hover {
+        color:aquamarine;
+    }
+}
+
+.navbar ul li a::before {
+    content: '';
+    background-color: aquamarine;
+    position: absolute;
+    width: 100%;
+    bottom: -5px;
+    height: 2px;
+    border-radius: 1em;
+    transform: scaleX(0);
+    transition: all ease 0.4s;
+}
+
+.navbar ul li a:hover::before {
+    transform: scaleX(100%);
 }
