@@ -8,7 +8,6 @@ import Footer from './components/layout/Footer'
 import Container from './components/layout/Container'
 
 import Home from './components/pages/Home'
-import CreateNote from './components/pages/CreateNote'
 import MyNotes from './components/pages/MyNotes'
 import NotePage from './components/pages/NotePage'
 
@@ -20,7 +19,6 @@ function App() {
         <Container customClass="min-height">
           <Routes>
             <Route path="/" element={<Home/>}/>
-            <Route path="/createnote" element={<CreateNote/>}/>
             <Route path="/mynotes" element={<MyNotes/>}/>
             <Route path="/notepage" element={<NotePage/>}/>
           </Routes>

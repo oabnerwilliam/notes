@@ -15,9 +15,6 @@ const Navbar = () => {
                         <Link to="/">Início</Link>
                     </li>
                     <li>
-                        <Link to="/createnote">Criar Nota</Link>
-                    </li>
-                    <li>
                         <Link to="/mynotes">Minhas Notas</Link>
                     </li>
                 </ul>    

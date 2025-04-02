@@ -12,8 +12,7 @@ const Home = () => {
         <h1>Bem-vindo ao <span>Notes!</span></h1>
         <p>Seu mais novo bloco de notas virtual!</p>
         <div className={style.links}>
-          <LinkButton to="/createnote" text="Criar Nota" color="black"/>
-          <LinkButton to="/mynotes" text="Ver Notas" color="green"/>
+          <LinkButton to="/mynotes" text="Minhas Notas" color="green"/>
         </div>
         
         <img src={Notes} alt="Notas"/>

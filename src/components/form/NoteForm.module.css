@@ -1,0 +1,33 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: 300px;
+    border: 1px solid black;
+    & input, textarea {
+        outline: none;
+        padding: 0.5em;
+        resize: none;
+        background-color: #efefef;
+    }
+}
+.title {
+    width: 100%;
+    height: 30%;
+    font-size: 1.8em;
+    border: none;
+}
+.content {
+    width: 100%;
+    height: 70%;
+    font-size: 1.2em;
+    border: none;
+}
+.submitButton {
+    border: none;
+    transition: all 0.3s ease;
+    &:hover {
+        cursor: pointer;
+        background-color: hsl(0, 0%, 84%);
+    }
+}
