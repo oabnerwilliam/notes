@@ -2,22 +2,21 @@ import React from 'react'
 
 import style from './Footer.module.css'
 
-import { FaInstagram, FaLinkedin, FaFacebook } from 'react-icons/fa'
+import { FaGithub, FaLinkedin} from 'react-icons/fa'
 
 const Footer = () => {
   return (
     <>
       <div className={style.footer}>
         <div className={style.icones}>
-          <div className={style.icone}>
-            <FaInstagram/>
-          </div>
-          <div className={style.icone}>
-            <FaFacebook/>
-          </div>
-          <div className={style.icone}>
+          <a className={style.icone} href="https://github.com/oabnerwilliam" 
+          target='_blank'>
+            <FaGithub/>
+          </a>  
+          <a className={style.icone} href="https://www.linkedin.com/in/abner-william/"
+          target='_blank'>
             <FaLinkedin/>
-          </div>  
+          </a>  
         </div>
         <p><strong>Notes&copy;</strong> 2025</p>
       </div>

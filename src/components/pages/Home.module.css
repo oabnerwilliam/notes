@@ -14,19 +14,18 @@
 }
 
 .home h1 {
-    font-size: 2.5em;
+    font-size: 3.5em;
     margin-bottom: none;
     & span {
-        background-color: black;
-        color: aquamarine;
+        background-color: aquamarine;
+        color: black;
         padding: .2em;
-        text-align: center;
     }
 }
 
 .home p {
-    color: grey;
-    font-size: 1.1em;
+    color: hsl(0, 0%, 20%);
+    font-size: 1.3em;
 }
 
 .home img {
