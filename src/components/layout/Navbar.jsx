@@ -17,6 +17,12 @@ const Navbar = () => {
                     <li>
                         <Link to="/mynotes">Minhas Notas</Link>
                     </li>
+                    <li>
+                        <Link to="/login">Login</Link>
+                    </li>
+                    <li>
+                        <Link to="/signup">Cadastro</Link>
+                    </li>
                 </ul>    
             </Container>
         </nav>

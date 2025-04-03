@@ -69,6 +69,7 @@ const SignUpPage = () => {
 
   return (
     <div className={style.formContainer}>
+        <h1>Cadastrar</h1>
         <UserForm type="signUp" btnText="Cadastrar" handleOnChange={handleOnChange} handleSubmit={submitUser}/>
     </div>
   )
