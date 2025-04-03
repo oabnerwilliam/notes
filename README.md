@@ -1,12 +1,46 @@
-# React + Vite
+# Notes
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Um aplicativo de notas desenvolvido com **React** e **json-server** para simular um back-end.
 
-Currently, two official plugins are available:
+## 📌 Funcionalidades
+- Criar, editar e excluir notas
+- Persistência de dados com `json-server`
+- Interface responsiva e estilizada
+- Inicialização automatizada do banco de dados
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Tecnologias
+- [React](https://react.dev/)
+- [json-server](https://github.com/typicode/json-server)
 
-## Expanding the ESLint configuration
+## 🛠 Configuração e Uso
+### 1️⃣ Clonar o repositório
+```sh
+git clone https://github.com/seu-usuario/seu-repositorio.git
+cd seu-repositorio
+```
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 2️⃣ Instalar dependências
+```sh
+npm install
+```
+
+### 3️⃣ Configurar o banco de dados
+```sh
+npm run setup-db
+```
+Esse comando copia `db.model.json` para `db.json`, garantindo que o banco de dados tenha um modelo inicial.
+
+### 4️⃣ Rodar o projeto
+```sh
+npm run dev
+```
+Esse comando:
+- **Inicia o `json-server`** na porta 5000
+- **Roda o React**
+
+## 🔥 Scripts disponíveis
+- `npm run setup-db` → Restaura o banco para o modelo inicial
+- `npm run dev` → Inicializa tudo (frontend + backend)
+
+📌 **Contribuições são bem-vindas!** Se tiver sugestões ou quiser colaborar, fique à vontade para abrir uma issue ou pull request. 😉
+
