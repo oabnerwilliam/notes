@@ -9,7 +9,8 @@ import Container from './components/layout/Container'
 
 import Home from './components/pages/Home'
 import MyNotes from './components/pages/MyNotes'
-import NotePage from './components/pages/NotePage'
+import SignUpPage from './components/pages/SignUpPage'
+import LoginPage from './components/pages/LoginPage'
 
 function App() {
   return (
@@ -20,7 +21,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home/>}/>
             <Route path="/mynotes" element={<MyNotes/>}/>
-            <Route path="/notepage" element={<NotePage/>}/>
+            <Route path="/signup" element={<SignUpPage/>}/>
+            <Route path="/login" element={<LoginPage/>}/>
           </Routes>
         </Container>
         <Footer/>
