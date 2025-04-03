@@ -5,9 +5,9 @@ import style from './SignUpPage.module.css'
 import { FaEye } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 
+import UserForm from '../form/UserForm'
+
 const SignUpPage = () => {
-  const [viewPassword, setViewPassword] = useState(false)
-  const [inputType, setInputType] = useState('password')
   const [user, setUser] = useState({})
   const [existingUsers, setExistingUsers] = useState([])
 
@@ -67,45 +67,9 @@ const SignUpPage = () => {
     }
   }
 
-  const showPassword = () => {
-    setViewPassword(!viewPassword)
-  }
-  useEffect(()=>{
-    if (viewPassword == true) {
-        setInputType('text')
-    } else {
-        setInputType('password')
-    }
-  }, [viewPassword])
-
   return (
     <div className={style.formContainer}>
-        <form className={style.form} onSubmit={submitUser}>
-            <input type="text" 
-            name="name" 
-            id="name" 
-            placeholder="Insira seu nome"
-            onChange={handleOnChange}
-            required/>
-            <input type="email" 
-            name="email" 
-            id="email"
-            placeholder="Insira seu email"
-            onChange={handleOnChange}
-            required/>
-            <div className={style.passwordContainer}>
-                <input type={inputType} 
-                name="password" 
-                id="password"
-                placeholder="Insira sua senha"
-                minLength="6"
-                onChange={handleOnChange}
-                required/>
-                <FaEye onClick={showPassword} 
-                className={style.eye}/>   
-            </div>
-            <button type="submit" className={style.submitButton}>Cadastrar</button>
-        </form>
+        <UserForm type="signUp" btnText="Cadastrar" handleOnChange={handleOnChange} handleSubmit={submitUser}/>
     </div>
   )
 }
