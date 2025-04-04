@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { use, useEffect, useState } from 'react'
 
 import style from './SignUpPage.module.css'
 
@@ -55,7 +55,6 @@ const SignUpPage = () => {
         .then((data)=>{
             console.log("Usuário cadastrado com sucesso!", data)
             return fetch("http://localhost:5000/users")
-            
         })
         .then(resp=>resp.json())
         .then((updatedUsers)=>{

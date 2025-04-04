@@ -11,6 +11,7 @@ const LoginPage = () => {
     const [existingUsers, setExistingUsers] = useState([])
     const [currentUser, setCurrentUser] = useState({})
     const [message, setMessage] = useState("")
+    const [localUsers, setLocalUsers] = useState([])
 
     const {login} = useAuth()
 
@@ -37,6 +38,18 @@ const LoginPage = () => {
         })
     }
 
+    /*const addLocalUser = (user) => {
+        setLocalUsers([
+            ...localUsers,
+            user
+        ])
+    }
+
+    useEffect(()=>{
+        console.log("Local users", localUsers)
+        localStorage.setItem("users", JSON.stringify(localUsers))
+    }, [localUsers])*/
+
     const handleLogin = (e) => {
         e.preventDefault()
         const foundUser = existingUsers.find((existingUser)=>existingUser.email===currentUser.email)
@@ -44,6 +57,7 @@ const LoginPage = () => {
             if (foundUser.password===currentUser.password) {
                 navigate("/mynotes")
                 login(foundUser)
+                //addLocalUser(foundUser)
             } else {
                 setMessage("Senha errada.")
             }
