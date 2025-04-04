@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 import style from './NoteCard.module.css'
 import { FaTrash, FaPencilAlt } from 'react-icons/fa'
 import { FaX } from 'react-icons/fa6'
+import NoteModal from './NoteModal'
+import { AnimatePresence, motion } from 'framer-motion'
 
 const NoteCard = ({note, handleDelete, handleSubmit}) => {
     const [editing, setEditing] = useState(false)
@@ -10,63 +12,43 @@ const NoteCard = ({note, handleDelete, handleSubmit}) => {
     
     const toggleEditing = () => {
         setEditing(!editing)
-    }  
-
-    const handleOnChange = (e) => {
-        setCurrentNote({
-          ...currentNote,
-          [e.target.name]: e.target.value
-        })
     }
 
-    const submit = () => {
-        handleSubmit(currentNote)
+    const submit = (note) => {
+        handleSubmit(note)
+        setCurrentNote(note)
         toggleEditing()
     }
 
     return (
         <>
-            <div className={style.noteCard} onClick={!editing && toggleEditing}>
-            {
-                !editing ? (
-                    <>
-                        <h2>{currentNote.title}</h2>
-                        <p>{currentNote.content}</p>   
-                    </>
-                ) : (
-                    <>
-                        <input 
-                            type="text" 
-                            name="title" 
-                            id="" 
-                            className={style.title} 
-                            placeholder="Título" 
-                            onChange={handleOnChange}
-                            value={currentNote.title || ''} 
-                            required/>
-                        <textarea 
-                            name="content" 
-                            id="" 
-                            className={style.content} 
-                            placeholder="Escreva sua nota..." 
-                            onChange={handleOnChange}
-                            value={currentNote.content || ''}  
-                            required/>
-                        <hr/>
-                        <button className={style.submitButton}
-                        onClick={submit}>Salvar Edição</button>
-                        <div className={style.actions}>
-                            <button onClick={toggleEditing}>
-                                <FaX/>   
-                            </button>
-                            <button onClick={handleDelete}>
-                                <FaTrash/>   
-                            </button>
-                        </div>
-                    </>
-                )
-            }
+            <div 
+            className={`${style.noteCard} 
+            ${editing && style.hide}`} 
+            onClick={toggleEditing}>
+                <h2>{currentNote.title}</h2>
+                <p>{currentNote.content}</p>   
             </div>
+            <AnimatePresence>
+                {
+                    editing && (
+                        <motion.div
+                        key={currentNote.id}
+                        initial={{opacity: 0}}
+                        animate={{opacity: 1}}
+                        transition={{duration: 0.3}}
+                        exit={{opacity: 0}}
+                        style={{ position: 'absolute', top: 0, 
+                        left: 0, 
+                        width: '100%' }}>
+                            <NoteModal handleDelete={handleDelete} 
+                            note={note}
+                            handleSubmit={submit}
+                            toggleEditing={toggleEditing}/>
+                        </motion.div>
+                        )
+                }
+            </AnimatePresence>
         </>    
     )
 }

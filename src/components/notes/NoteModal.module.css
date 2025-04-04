@@ -1,0 +1,76 @@
+.modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid black;
+    padding: .5em;
+    width: 600px;
+    height: 400px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    background-color: white;
+    & input, textarea {
+        outline: none;
+        resize: none;
+        background-color: white;
+        border: none;
+    }
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: hsl(0, 0%, 0%, 0.4);
+}
+
+.title {
+    padding: .5em;
+    font-size: 1.5em;
+    height: 20%;
+    white-space: normal;
+    word-break: break-all;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.content {
+    padding: .5em;
+    font-size: 1.2em;
+    height: 100%;
+    white-space: normal;
+    word-break: break-all;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.title, .content {
+    white-space: normal;
+}
+
+.actions {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: .5em
+}
+
+.actions button {
+    background-color: inherit;
+    border: none;
+    font-size: 1.1em;
+    transition: all 0.3s ease;
+    &:hover {
+        cursor: pointer;
+        color: #7fffd4;
+    }
+}
