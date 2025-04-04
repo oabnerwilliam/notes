@@ -63,7 +63,7 @@ const SignUpPage = () => {
         .catch((err)=>{
             console.log("Erro ao cadastrar usuário ou atualizar lista.", err)
         })
-        navigate("/mynotes")
+        navigate("/login")
     }
   }
 

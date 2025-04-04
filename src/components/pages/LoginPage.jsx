@@ -40,9 +40,6 @@ const LoginPage = () => {
                 navigate("/mynotes")
                 localStorage.setItem("loggedUser", JSON.stringify(foundUser))
             } else {
-                const timer = setTimeout(()=>{
-
-                }, 3000)
                 setMessage("Senha errada.")
             }
         } else {

@@ -1,19 +1,25 @@
 .noteCard {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     border: 1px solid black;
     padding: .5em;
     height: auto;
-    width: 203px;
+    min-width: 203px;
+    max-width: 100%;
     min-height: 180px;
     overflow: hidden;
-    & input, textarea {
+    transition: all 0.3s ease;
+    & input, textarea, button {
         outline: none;
         padding: 0.5rem;
         resize: none;
         background-color: #efefef;
         border: solid black 1px;
+    }
+    &:hover {
+        cursor: pointer;
+        background-color: hsl(0, 0%, 84%);
     }
 }
 

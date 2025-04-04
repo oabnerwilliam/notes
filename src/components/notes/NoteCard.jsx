@@ -2,14 +2,15 @@ import React, { useEffect, useState } from 'react'
 
 import style from './NoteCard.module.css'
 import { FaTrash, FaPencilAlt } from 'react-icons/fa'
+import { FaX } from 'react-icons/fa6'
 
 const NoteCard = ({note, handleDelete, handleSubmit}) => {
     const [editing, setEditing] = useState(false)
     const [currentNote, setCurrentNote] = useState(note)
     
-    const editNote = () => {
-        setEditing(true)
-    }
+    const toggleEditing = () => {
+        setEditing(!editing)
+    }  
 
     const handleOnChange = (e) => {
         setCurrentNote({
@@ -18,31 +19,22 @@ const NoteCard = ({note, handleDelete, handleSubmit}) => {
         })
     }
 
-    const submit = (e) => {
-        e.preventDefault()
+    const submit = () => {
         handleSubmit(currentNote)
-        setEditing(false)
+        toggleEditing()
     }
 
     return (
         <>
+            <div className={style.noteCard} onClick={!editing && toggleEditing}>
             {
                 !editing ? (
-                    <div className={style.noteCard} 
-                    key={currentNote.id}>
+                    <>
                         <h2>{currentNote.title}</h2>
-                        <p>{currentNote.content}</p>
-                        <div className={style.actions}>
-                            <button onClick={editNote}>
-                                <FaPencilAlt/>    
-                            </button>
-                            <button onClick={handleDelete}>
-                                <FaTrash/>   
-                            </button>
-                        </div>
-                    </div>
+                        <p>{currentNote.content}</p>   
+                    </>
                 ) : (
-                    <form className={style.noteCard} onSubmit={submit}>
+                    <>
                         <input 
                             type="text" 
                             name="title" 
@@ -61,21 +53,20 @@ const NoteCard = ({note, handleDelete, handleSubmit}) => {
                             value={currentNote.content || ''}  
                             required/>
                         <hr/>
-                        <input type="submit" 
-                        value="Editar Nota" 
-                        className={style.submitButton}/>
+                        <button className={style.submitButton}
+                        onClick={submit}>Salvar Edição</button>
                         <div className={style.actions}>
-                            <button onClick={editNote}>
-                                <FaPencilAlt/>    
+                            <button onClick={toggleEditing}>
+                                <FaX/>   
                             </button>
                             <button onClick={handleDelete}>
                                 <FaTrash/>   
                             </button>
                         </div>
-                    </form>
+                    </>
                 )
             }
-            
+            </div>
         </>    
     )
 }

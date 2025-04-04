@@ -4,11 +4,13 @@ import style from './MyNotes.module.css'
 
 import NoteForm from '../form/NoteForm'
 import NoteCard from '../notes/NoteCard'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const MyNotes = () => {
   const [notes, setNotes] = useState([])
   const [filteredNotes, setFilteredNotes] = useState([])
-  
+  const [currentUser, setCurrentUser] = useState({})
+
   const handleSetNotes = (item) => {
     setNotes(item)
   }
@@ -16,7 +18,7 @@ const MyNotes = () => {
   const handleSetFilteredNotes = (item) => {
     setFilteredNotes(item)
   }
-
+  
   useEffect(()=>{
     fetch("http://localhost:5000/notes", {
       method: "GET",
@@ -26,17 +28,27 @@ const MyNotes = () => {
     })
     .then((resp)=>resp.json())
     .then((data)=>{
-      console.log(data)
       handleSetNotes(data)
     })
     .catch((err)=>console.log(err))
+
+    const user = JSON.parse(localStorage.getItem("loggedUser"))
+    setCurrentUser(user)
   }, [])
 
   useEffect(()=>{
-    handleSetFilteredNotes(notes.slice().reverse())
-  }, [notes])
+    if (currentUser) {
+      handleSetFilteredNotes(notes.filter((note)=> note.userId===currentUser.id
+    ).slice().reverse())
+    }
+  }, [notes, currentUser])
 
   const createNote = (note) => {
+    note = {
+      ...note,
+      ["userId"]: currentUser.id
+    }
+    
     fetch("http://localhost:5000/notes", {
       method: "POST",
       headers: {
@@ -84,7 +96,7 @@ const MyNotes = () => {
     })
     .catch((err)=>console.log(err))
   }
-  
+
   return(
     <div className={style.notes}>
       <h1>Minhas Notas</h1>

@@ -23,6 +23,24 @@
     }
 }
 
+.title {
+    align-self: center;
+}
+
+.navbar ul button {
+    padding: 1em 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2em;
+    transition: all 0.3s ease;
+    &:hover {
+        background-color: aquamarine;
+        color: black;
+        cursor: pointer;
+    }
+} 
+
 .navbar ul li a::before {
     content: '';
     background-color: aquamarine;
