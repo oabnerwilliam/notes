@@ -16,7 +16,7 @@ import {useAuth} from './contexts/AuthContext'
 function PrivateRoute({children}) {
   const {user} = useAuth()
 
-  return user ? children : <Navigate to="/mynotes"/>
+  return user ? children : <Navigate to="/"/>
 }
 
 function App() {
