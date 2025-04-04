@@ -6,6 +6,7 @@ import { FaEye } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 
 import UserForm from '../form/UserForm'
+import LinkButton from '../layout/LinkButton'
 
 const SignUpPage = () => {
   const [user, setUser] = useState({})
@@ -71,6 +72,7 @@ const SignUpPage = () => {
     <div className={style.formContainer}>
         <h1>Cadastrar</h1>
         <UserForm type="signUp" btnText="Cadastrar" handleOnChange={handleOnChange} handleSubmit={submitUser}/>
+        <LinkButton to="/login" text="Fazer Login" color="green"/>
     </div>
   )
 }

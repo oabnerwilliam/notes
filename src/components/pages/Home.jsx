@@ -2,18 +2,13 @@ import React, { useEffect, useState } from 'react'
 
 import style from './Home.module.css'
 
-import Notes from '../../img/notes.svg'
+import notes from '../../img/notes.svg'
 import LinkButton from '../layout/LinkButton'
 
+import { useAuth } from '../../contexts/AuthContext'
+
 const Home = () => {
-  const [loggedUser, setLoggedUser] = useState({})
-  
-  useEffect(()=>{
-    const user = JSON.parse(localStorage.getItem("loggedUser"))
-    if (user) {
-      setLoggedUser(user)
-    }
-  }, [])
+  const {user} = useAuth()
 
   return (
     <>
@@ -21,16 +16,16 @@ const Home = () => {
         <h1><span>NOTES</span></h1>
         <p>O seu bloco de notas virtual.</p>
         {
-          Object.keys(loggedUser).length>0 ? (
+          user ? (
             <LinkButton to="/mynotes" text="Minhas Notas" color="black"/>
           ) : (
             <div className={style.links}>
               <LinkButton to="/login" text="Entrar" color="green"/>
-              <LinkButton to="/signup" text="Cadastrar" color="black"/>
+              <LinkButton to="/signup" text="Criar Conta" color="black"/>
             </div>
           )
         }
-        <img src={Notes} alt="Notas"/>
+        <img src={notes} alt="Notas"/>
       </div>
     </>
   )

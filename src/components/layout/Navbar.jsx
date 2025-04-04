@@ -3,21 +3,17 @@ import style from './Navbar.module.css'
 import { Link, useNavigate } from 'react-router-dom'
 
 import Container from './Container'
+import AuthButton from './AuthButton'
+
+import {useAuth} from '../../contexts/AuthContext'
 
 const Navbar = () => {
-    const [loggedUser, setLoggedUser] = useState({})
+    const {user, logout} = useAuth()
 
     const navigate = useNavigate()
 
-    useEffect(()=>{
-        const user = JSON.parse(localStorage.getItem("loggedUser"))
-        if (user) {
-            setLoggedUser(user)
-        }
-    }, [])
-    
-    const logout = () => {
-        localStorage.removeItem("loggedUser")
+    const handleLogout = () => {
+        logout()
         navigate("/")
     }
     
@@ -27,32 +23,32 @@ const Navbar = () => {
                 <Container>
                     <Link to="/" className={style.title}><h1>NOTES</h1></Link>
                     <ul>
-                        <li>
-                            <Link to="/">Início</Link>
-                        </li>
                         {
-                            Object.keys(loggedUser).length>0 ? (
+                            user ? (
                                 <>
                                     <li>
-                                        <Link to="/mynotes">Minhas Notas</Link>
+                                        <Link className={style.page} to="/mynotes">Minhas Notas</Link>
                                     </li>
-                                    <button onClick={logout}>Sair</button>    
+                                    <AuthButton text="Sair" 
+                                    color="green"
+                                    type="button"
+                                    handleOnClick={handleLogout}/>    
                                 </>
                             ) : (
                                 <>
-                                    <li>
-                                        <Link to="/login">Login</Link>
-                                    </li>
-                                    <li>
-                                        <Link to="/signup">Cadastro</Link>
-                                    </li>
-                                </>
-                                
+                                    <AuthButton
+                                    text="Entrar"
+                                    color="green"
+                                    type="link"
+                                    to="/login"/>
+                                    <AuthButton
+                                    text="Criar Conta"
+                                    color="white"
+                                    type="link"
+                                    to="/signup"/>
+                                </> 
                             )
                         }
-                        
-                        
-                        
                     </ul>    
                 </Container>
             </nav>

@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import UserForm from '../form/UserForm'
-
 import style from './LoginPage.module.css'
 import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import LinkButton from '../layout/LinkButton'
+
+import { useAuth } from '../../contexts/AuthContext'
 
 const LoginPage = () => {
     const [existingUsers, setExistingUsers] = useState([])
-    const [user, setUser] = useState({})
+    const [currentUser, setCurrentUser] = useState({})
     const [message, setMessage] = useState("")
+
+    const {login} = useAuth()
 
     const navigate = useNavigate()
 
@@ -26,19 +31,19 @@ const LoginPage = () => {
     }, [])
 
     const handleOnChange = (e) => {
-        setUser({
-            ...user,
+        setCurrentUser({
+            ...currentUser,
             [e.target.name]: e.target.value
         })
     }
 
-    const login = (e) => {
+    const handleLogin = (e) => {
         e.preventDefault()
-        const foundUser = existingUsers.find((existingUser)=>existingUser.email===user.email)
+        const foundUser = existingUsers.find((existingUser)=>existingUser.email===currentUser.email)
         if (foundUser) {
-            if (foundUser.password===user.password) {
+            if (foundUser.password===currentUser.password) {
                 navigate("/mynotes")
-                localStorage.setItem("loggedUser", JSON.stringify(foundUser))
+                login(foundUser)
             } else {
                 setMessage("Senha errada.")
             }
@@ -58,7 +63,8 @@ const LoginPage = () => {
                 )
             }
             <h1>Entrar</h1>
-            <UserForm type="login" btnText="Entrar" handleOnChange={handleOnChange} handleSubmit={login}/>
+            <UserForm type="login" btnText="Entrar" handleOnChange={handleOnChange} handleSubmit={handleLogin}/>
+            <LinkButton to="/signup" text="Fazer Cadastro" color="green"/>
         </div>  
     )
 }

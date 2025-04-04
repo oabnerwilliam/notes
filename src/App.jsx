@@ -1,7 +1,6 @@
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Routes, Route, Navigate, useLocation} from 'react-router-dom'
 import React, { useEffect } from 'react'
 
-import { useState } from 'react'
 import './App.css'
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
@@ -12,6 +11,15 @@ import MyNotes from './components/pages/MyNotes'
 import SignUpPage from './components/pages/SignUpPage'
 import LoginPage from './components/pages/LoginPage'
 
+import {useAuth} from './contexts/AuthContext'
+
+function PrivateRoute({children}) {
+  const {user} = useAuth()
+  const location = useLocation()
+
+  return user ? children : <Navigate to="/"/>
+}
+
 function App() {
   return (
     <div className='App'>
@@ -20,7 +28,12 @@ function App() {
         <Container customClass="min-height">
           <Routes>
             <Route path="/" element={<Home/>}/>
-            <Route path="/mynotes" element={<MyNotes/>}/>
+            <Route path="/mynotes" 
+            element={
+              <PrivateRoute>
+                <MyNotes/>
+              </PrivateRoute>
+            }/>
             <Route path="/signup" element={<SignUpPage/>}/>
             <Route path="/login" element={<LoginPage/>}/>
           </Routes>

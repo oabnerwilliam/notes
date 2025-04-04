@@ -6,10 +6,14 @@ import NoteForm from '../form/NoteForm'
 import NoteCard from '../notes/NoteCard'
 import { useLocation, useNavigate } from 'react-router-dom'
 
+import { useAuth } from '../../contexts/AuthContext'
+
 const MyNotes = () => {
   const [notes, setNotes] = useState([])
   const [filteredNotes, setFilteredNotes] = useState([])
-  const [currentUser, setCurrentUser] = useState({})
+  //const [currentUser, setCurrentUser] = useState({})
+
+  const {user} = useAuth()
 
   const handleSetNotes = (item) => {
     setNotes(item)
@@ -31,22 +35,19 @@ const MyNotes = () => {
       handleSetNotes(data)
     })
     .catch((err)=>console.log(err))
-
-    const user = JSON.parse(localStorage.getItem("loggedUser"))
-    setCurrentUser(user)
   }, [])
 
   useEffect(()=>{
-    if (currentUser) {
-      handleSetFilteredNotes(notes.filter((note)=> note.userId===currentUser.id
+    if (user) {
+      handleSetFilteredNotes(notes.filter((note)=> note.userId===user.id
     ).slice().reverse())
     }
-  }, [notes, currentUser])
+  }, [notes, user])
 
   const createNote = (note) => {
     note = {
       ...note,
-      ["userId"]: currentUser.id
+      ["userId"]: user.id
     }
     
     fetch("http://localhost:5000/notes", {
