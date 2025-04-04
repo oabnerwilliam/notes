@@ -26,12 +26,20 @@ const UserForm = ({type, btnText, handleOnChange, handleSubmit}) => {
         <form className={style.form} onSubmit={handleSubmit}>
                 {
                     type=="signUp" && (
-                        <input type="text" 
-                        name="name" 
-                        id="name" 
-                        placeholder="Insira seu nome"
-                        onChange={handleOnChange}
-                        required/>
+                        <>
+                            <input type="text" 
+                            name="firstName" 
+                            id="name" 
+                            placeholder="Insira seu primeiro nome"
+                            onChange={handleOnChange}
+                            required/>
+                            <input type="text" 
+                            name="lastName" 
+                            id="name" 
+                            placeholder="Insira seu sobrenome"
+                            onChange={handleOnChange}
+                            required/>    
+                        </>
                     )
                 }
                 <input type="email" 

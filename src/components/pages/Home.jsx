@@ -16,7 +16,7 @@ const Home = () => {
         {
           user ? (
             <>
-              <h1>Olá, <span>{user.name}</span></h1>
+              <h1>Olá, <span>{user.firstName}</span></h1>
               <p>Bem-vindo de volta ao seu bloco de notas virtual!</p>
               <LinkButton to="/mynotes" text="Minhas Notas" color="black"/>  
             </>

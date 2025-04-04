@@ -7,10 +7,12 @@ import { useNavigate } from 'react-router-dom'
 
 import UserForm from '../form/UserForm'
 import LinkButton from '../layout/LinkButton'
+import Message from '../layout/Message'
 
 const SignUpPage = () => {
   const [user, setUser] = useState({})
   const [existingUsers, setExistingUsers] = useState([])
+  const [message, setMessage] = useState("")
 
   const navigate = useNavigate()
 
@@ -42,7 +44,10 @@ const SignUpPage = () => {
     e.preventDefault()
     const userExists = existingUsers.find((existingUser)=> user.email === existingUser.email)
     if (userExists) {
-        console.log("Usuário já cadastrado.")
+        setMessage("Usuário já cadastrado.")
+        setTimeout(()=>{
+            setMessage("")
+        }, 3000)
     } else {
         fetch("http://localhost:5000/users", {
             method: "POST",
@@ -69,6 +74,11 @@ const SignUpPage = () => {
 
   return (
     <div className={style.formContainer}>
+        {
+            message && (
+                <Message msg={message} type="error"/>
+            )
+        }
         <h1>Cadastrar</h1>
         <UserForm type="signUp" btnText="Cadastrar" handleOnChange={handleOnChange} handleSubmit={submitUser}/>
         <LinkButton to="/login" text="Fazer Login" color="green"/>

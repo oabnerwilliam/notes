@@ -6,12 +6,13 @@ import { Link } from 'react-router-dom'
 import LinkButton from '../layout/LinkButton'
 
 import { useAuth } from '../../contexts/AuthContext'
+import Message from '../layout/Message'
 
 const LoginPage = () => {
     const [existingUsers, setExistingUsers] = useState([])
     const [currentUser, setCurrentUser] = useState({})
     const [message, setMessage] = useState("")
-    const [localUsers, setLocalUsers] = useState([])
+    //const [localUsers, setLocalUsers] = useState([])
 
     const {login} = useAuth()
 
@@ -73,7 +74,7 @@ const LoginPage = () => {
         <div className={style.loginContainer}>
             {
                 message && (
-                    <p>{message}</p>
+                    <Message type={"error"} msg={message}/>
                 )
             }
             <h1>Entrar</h1>

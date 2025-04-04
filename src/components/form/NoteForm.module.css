@@ -1,9 +1,11 @@
 .form {
     display: flex;
     flex-direction: column;
-    height: auto;
-    width: 300px;
+    height: 200px;
+    max-height: auto ;
+    width: 600px;
     border: 1px solid black;
+    transition: all 0.3s ease;
     & input, textarea {
         outline: none;
         padding: 0.5em;

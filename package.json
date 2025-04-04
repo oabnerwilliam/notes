@@ -6,7 +6,7 @@
   "scripts": {
     "frontend": "vite",
     "backend": "json-server --watch db.json --port 5000",
-    "setup-db": "node -e \"require('fs-extra').copySync('db.model.json', 'db.json')\"",
+    "setup-db": "node -e \"require('fs-extra').copySync('dbmodel.json', 'db.json')\"",
     "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
     "build": "vite build",
     "lint": "eslint .",
