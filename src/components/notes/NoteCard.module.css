@@ -1,13 +1,15 @@
 .noteCard {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     border: 1px solid black;
     padding: .5em;
+    padding-bottom: 1em;
     min-width: 200px;
     max-width: 100%;
     min-height: 200px;
-    max-height: auto;
+    height: auto;
+    max-height: 280px;
     overflow: hidden;
     transition: all 0.3s ease;
     &:hover {
@@ -29,4 +31,7 @@
     display: -webkit-box;
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
+    overflow: hidden;
+    line-clamp: 9;
+    -webkit-line-clamp: 9;
 }
