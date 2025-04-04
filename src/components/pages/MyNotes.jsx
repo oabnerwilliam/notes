@@ -100,7 +100,7 @@ const MyNotes = () => {
 
   return(
     <div className={style.notes}>
-      <h1>Minhas Notas</h1>
+      <h1>Minhas Anotações</h1>
       <div className={style.noteForm}>
         <NoteForm handleSubmit={createNote}/>
       </div>

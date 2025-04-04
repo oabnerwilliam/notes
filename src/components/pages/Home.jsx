@@ -13,16 +13,23 @@ const Home = () => {
   return (
     <>
       <div className={style.home}>
-        <h1><span>NOTES</span></h1>
-        <p>O seu bloco de notas virtual.</p>
         {
           user ? (
-            <LinkButton to="/mynotes" text="Minhas Notas" color="black"/>
+            <>
+              <h1>Olá, <span>{user.name}</span></h1>
+              <p>Bem-vindo de volta ao seu bloco de notas virtual!</p>
+              <LinkButton to="/mynotes" text="Minhas Notas" color="black"/>  
+            </>
           ) : (
-            <div className={style.links}>
-              <LinkButton to="/login" text="Entrar" color="green"/>
-              <LinkButton to="/signup" text="Criar Conta" color="black"/>
-            </div>
+            <>
+              <h1><span>NOTES</span></h1>
+              <p>O seu bloco de notas virtual.</p>
+              <div className={style.links}>
+                <LinkButton to="/login" text="Entrar" color="green"/>
+                <LinkButton to="/signup" text="Criar Conta" color="black"/>
+              </div>
+            </>
+            
           )
         }
         <img src={notes} alt="Notas"/>

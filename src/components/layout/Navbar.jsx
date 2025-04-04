@@ -26,9 +26,6 @@ const Navbar = () => {
                         {
                             user ? (
                                 <>
-                                    <li>
-                                        <Link className={style.page} to="/mynotes">Minhas Notas</Link>
-                                    </li>
                                     <AuthButton text="Sair" 
                                     color="green"
                                     type="button"

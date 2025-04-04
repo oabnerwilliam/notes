@@ -13,15 +13,10 @@ import LoginPage from './components/pages/LoginPage'
 
 import {useAuth} from './contexts/AuthContext'
 
-function PrivateRoute({children, to, loggedIn}) {
+function PrivateRoute({children}) {
   const {user} = useAuth()
-  
-  //return loggedIn==user ? children : <Navigate to={to}/>
-  if (!!user !== loggedIn) {
-    return children
-  } else {
-    return <Navigate to={to} />
-  }
+
+  return user ? children : <Navigate to="/mynotes"/>
 }
 
 function App() {
@@ -31,14 +26,10 @@ function App() {
         <Navbar/>
         <Container customClass="min-height">
           <Routes>
-            <Route path="/" element={
-              <PrivateRoute to="/mynotes" loggedIn={true}>
-                <Home/>
-              </PrivateRoute>
-            }/>
+            <Route path="/" element={<Home/>}/>
             <Route path="/mynotes" 
             element={
-              <PrivateRoute to="/" loggedIn={false}>
+              <PrivateRoute>
                 <MyNotes/>
               </PrivateRoute>
             }/>
