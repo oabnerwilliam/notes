@@ -1,6 +1,13 @@
 .navbar {
     padding: 2em;
+    height: 112px;
     background-color: black;
+}
+
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .navbar ul {

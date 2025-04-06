@@ -11,6 +11,11 @@
         padding: .3em;
     }
 }
+.header {
+    display: flex;
+    justify-content: space-between;
+    width: 600px;
+}
 .noteList {
     display: grid;
     width: 100%;

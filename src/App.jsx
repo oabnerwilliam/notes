@@ -1,5 +1,5 @@
 import {BrowserRouter as Router, Routes, Route, Navigate, useLocation} from 'react-router-dom'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import './App.css'
 import Navbar from './components/layout/Navbar'
@@ -12,10 +12,15 @@ import SignUpPage from './components/pages/SignUpPage'
 import LoginPage from './components/pages/LoginPage'
 
 import {useAuth} from './contexts/AuthContext'
+import Loader from './components/layout/Loader'
 
 function PrivateRoute({children}) {
-  const {user} = useAuth()
+  const {user, isLoading} = useAuth()
 
+  if (isLoading) {
+    return <Loader fullScreen/>
+  }
+  
   return user ? children : <Navigate to="/"/>
 }
 

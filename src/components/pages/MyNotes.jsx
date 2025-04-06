@@ -4,16 +4,22 @@ import style from './MyNotes.module.css'
 
 import NoteForm from '../form/NoteForm'
 import NoteCard from '../notes/NoteCard'
-import { useLocation, useNavigate } from 'react-router-dom'
+import SearchInput from '../form/search/input/SearchInput'
 
 import { useAuth } from '../../contexts/AuthContext'
+import useSearch from '../../hooks/search/useSearch'
+import Loader from '../layout/Loader'
+import getList from '../util/getList'
 
 const MyNotes = () => {
   const [notes, setNotes] = useState([])
   const [filteredNotes, setFilteredNotes] = useState([])
-  //const [currentUser, setCurrentUser] = useState({})
+  const [searchFiltered, setSearchFiltered] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
 
   const {user} = useAuth()
+
+  const {searchItem} = useSearch(filteredNotes, setSearchFiltered)
 
   const handleSetNotes = (item) => {
     setNotes(item)
@@ -24,46 +30,41 @@ const MyNotes = () => {
   }
   
   useEffect(()=>{
-    fetch("http://localhost:5000/notes", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
-      }
+    getList("notes", (list)=>{
+      handleSetNotes(list)
     })
-    .then((resp)=>resp.json())
-    .then((data)=>{
-      handleSetNotes(data)
-    })
-    .catch((err)=>console.log(err))
   }, [])
 
   useEffect(()=>{
     if (user) {
-      handleSetFilteredNotes(notes.filter((note)=> note.userId===user.id
-    ).slice().reverse())
+      const firstFilter = notes.filter((note) => {
+        return note.userId===user.id
+      }).slice().reverse()
+      handleSetFilteredNotes(firstFilter)
     }
   }, [notes, user])
 
-  const createNote = (note) => {
-    note = {
-      ...note,
-      ["userId"]: user.id
+    const createNote = (note) => {
+      note = {
+        ...note,
+        ["userId"]: user.id
+      }
+      
+      fetch("http://localhost:5000/notes", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(note)
+      })
+      .then((resp)=>resp.json())
+      .then((data)=>{
+        console.log(data)
+        setNotes((notes) => [...notes, data])
+        setIsLoading(false)
+      })
+      .catch((err)=>console.log(err))
     }
-    
-    fetch("http://localhost:5000/notes", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(note)
-    })
-    .then((resp)=>resp.json())
-    .then((data)=>{
-      console.log(data)
-      setNotes((notes) => [...notes, data])
-    })
-    .catch((err)=>console.log(err))
-  }
 
   const editNote = (note) => {
     fetch(`http://localhost:5000/notes/${note.id}`, {
@@ -79,6 +80,7 @@ const MyNotes = () => {
       setNotes((prevNotes) => 
         prevNotes.map((note) => (note.id === data.id ? data : note))
       )
+      setIsLoading(false)
     })
     .catch((err)=>console.log(err))
   }
@@ -94,26 +96,55 @@ const MyNotes = () => {
     .then((data)=>{
       console.log("Projeto excluido com sucesso!", data)
       setNotes((notes)=>notes.filter((note)=>note.id!==id))
+      setIsLoading(false)
     })
     .catch((err)=>console.log(err))
   }
 
+  useEffect(()=>{
+    if (isLoading) {
+      const timer = setTimeout(()=>{
+        setSearchFiltered(filteredNotes)
+        setIsLoading(false)
+      }, 1000)
+
+      return ()=>clearTimeout(timer)  
+    } else {
+      setSearchFiltered(filteredNotes)
+    }
+  }, [filteredNotes])
+
   return(
     <div className={style.notes}>
-      <h1>Minhas Anotações</h1>
-      <div className={style.noteForm}>
-        <NoteForm handleSubmit={createNote}/>
-      </div>
-      <div className={style.noteList}>
-        {
-          filteredNotes.map((note)=>(
-            <NoteCard note={note} 
-            key={note.id} 
-            handleDelete={()=>deleteNote(note.id)} 
-            handleSubmit={editNote}/>
-          ))
-        }  
-      </div>
+      {
+        isLoading ? (
+          <Loader/>
+        ) : (
+          <>
+            <div className={style.header}>
+              <h1>Minhas Anotações</h1>
+              <SearchInput
+              handleOnChange={searchItem}
+              placeholder="Pesquisar nota"
+              />
+            </div>
+            <div className={style.noteForm}>
+              <NoteForm handleSubmit={createNote}/>
+            </div>
+            <div className={style.noteList}>
+              {
+                searchFiltered.map((note)=>(
+                  <NoteCard note={note}
+                  key={note.id}
+                  handleDelete={()=>deleteNote(note.id)}
+                  handleSubmit={editNote}
+                  />
+                ))  
+              }
+            </div>
+          </>
+        )
+      }
       
     </div>
   )

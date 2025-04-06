@@ -6,9 +6,10 @@ import Container from './Container'
 import AuthButton from './AuthButton'
 
 import {useAuth} from '../../contexts/AuthContext'
+import Loader from './Loader'
 
 const Navbar = () => {
-    const {user, logout} = useAuth()
+    const {user, logout, isLoading} = useAuth()
 
     const navigate = useNavigate()
 
@@ -19,18 +20,23 @@ const Navbar = () => {
     
     return (
         <>
-            <nav className={style.navbar}>
+            <nav className={`${style.navbar} ${isLoading ? style.loading : ''}`}>
                 <Container>
                     <Link to="/" className={style.title}><h1>NOTES</h1></Link>
                     <ul>
                         {
                             user ? (
                                 <>
+                                    <AuthButton text={user.firstName}
+                                    type="link"
+                                    color="white"/>
                                     <AuthButton text="Sair" 
                                     color="green"
                                     type="button"
                                     handleOnClick={handleLogout}/>    
                                 </>
+                            ) : isLoading ? (
+                                <></>
                             ) : (
                                 <>
                                     <AuthButton
@@ -46,6 +52,7 @@ const Navbar = () => {
                                 </> 
                             )
                         }
+                        
                     </ul>    
                 </Container>
             </nav>

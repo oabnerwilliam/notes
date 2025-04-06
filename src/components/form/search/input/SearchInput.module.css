@@ -1,0 +1,58 @@
+.search {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1em;
+    position: relative;
+}
+
+.search .overlay {
+    position: absolute;
+    left: -2.5em;
+    width: calc(100% + 2.5em);
+    height: 100%;
+    background-color: #efefef;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2em;
+    transition: all ease 0.3s;
+    & button {
+        background-color: transparent;
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 3.5em;
+        width: 3.5em;
+        border-radius: 100%;
+        position: absolute;
+        right: 1em;
+        transition: all ease 0.3s;
+        &:hover {
+            cursor: pointer;
+            background-color: hsl(0, 0%, 80%);
+        }
+    }
+    & svg {
+        font-size: 1.5em;
+        fill: black;
+    }
+}
+
+.search .overlay.open {
+    width: 2.5em;
+}
+
+.search input {
+    padding: .8em;
+    border-radius: 2em;
+    outline: none;
+    border: none;
+    border: 1px solid white;
+    height: 3.5em;
+    &:focus {
+        border: 1px solid black;
+    }
+}

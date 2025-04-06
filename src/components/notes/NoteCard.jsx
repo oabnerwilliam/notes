@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 import style from './NoteCard.module.css'
 import { FaTrash, FaPencilAlt } from 'react-icons/fa'
@@ -9,6 +9,8 @@ import { AnimatePresence, motion } from 'framer-motion'
 const NoteCard = ({note, handleDelete, handleSubmit}) => {
     const [editing, setEditing] = useState(false)
     const [currentNote, setCurrentNote] = useState(note)
+
+    const trashRef = useRef()
     
     const toggleEditing = () => {
         setEditing(!editing)
@@ -25,9 +27,23 @@ const NoteCard = ({note, handleDelete, handleSubmit}) => {
             <div 
             className={`${style.noteCard} 
             ${editing && style.hide}`} 
-            onClick={toggleEditing}>
-                <h2>{currentNote.title}</h2>
-                <p>{currentNote.content}</p>   
+            onClick={(e)=>{
+                if (!trashRef.current.contains(e.target)) {
+                    toggleEditing()    
+                }
+            }}>
+                <div className={style.info}>
+                    <h2>{currentNote.title}</h2>
+                    <p>{currentNote.content}</p>    
+                </div>
+                <div className={style.actions}>
+                    <button 
+                    onClick={handleDelete}
+                    ref={trashRef}
+                    >
+                        <FaTrash/>   
+                    </button>
+                </div>   
             </div>
             <AnimatePresence>
                 {

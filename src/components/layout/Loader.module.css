@@ -1,0 +1,21 @@
+.loaderContainer {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    & img {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+.fullScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #efefef;
+    z-index: 2
+}
