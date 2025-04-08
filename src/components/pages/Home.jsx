@@ -6,6 +6,7 @@ import notes from '../../img/notes.svg'
 import LinkButton from '../layout/LinkButton'
 
 import { useAuth } from '../../contexts/AuthContext'
+import Loader from '../layout/Loader'
 
 const Home = () => {
   const {user} = useAuth()
@@ -29,7 +30,6 @@ const Home = () => {
                 <LinkButton to="/signup" text="Criar Conta" color="page"/>
               </div>
             </>
-
           )
         }
         <img src={notes} alt="Notas"/>

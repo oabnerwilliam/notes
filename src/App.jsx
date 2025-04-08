@@ -1,5 +1,5 @@
-import {BrowserRouter as Router, Routes, Route, Navigate, useLocation} from 'react-router-dom'
-import React, { useEffect, useState } from 'react'
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import React from 'react'
 
 import './App.css'
 import Navbar from './components/layout/Navbar'
@@ -13,15 +13,6 @@ import LoginPage from './components/pages/LoginPage'
 import DarkButton from './components/layout/darkmode/DarkButton'
 
 function App() {
-  useEffect(()=>{
-    const dark = localStorage.getItem("darkmode")
-    if (dark) {
-      document.documentElement.classList.add("darkmode")
-    } else {
-      document.documentElement.classList.remove("darkmode")
-    }
-  }, [])
-
   return (
     <div className='App'>
       <Router>

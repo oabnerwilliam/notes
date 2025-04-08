@@ -17,7 +17,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 2em;
-    transition: all ease 0.3s;
+    transition: width ease 0.3s;
     & button {
         background-color: transparent;
         border: none;

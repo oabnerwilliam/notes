@@ -41,7 +41,14 @@ const Navbar = () => {
                     <ul>
                         {
                             user ? (
-                                <>
+                                <motion.div
+                                initial={{opacity: 0}}
+                                animate={{opacity: 1}}
+                                transition={{duration: 0.3}}
+                                style={{display: 'flex',
+                                    gap: '1em'
+                                }}
+                                >
                                     <AuthButton text={user.firstName}
                                     type="link"
                                     color="page"/>
@@ -49,7 +56,7 @@ const Navbar = () => {
                                     color="color"
                                     type="button"
                                     handleOnClick={handleLogout}/>    
-                                </>
+                                </motion.div>
                             ) : isLoading ? (
                                 <></>
                             ) : (
