@@ -33,7 +33,7 @@ const Accounts = () => {
                             <button className={style.account}
                             onClick={handleOnClick(account)}
                             key={account.id}>
-                                <h2>{account.firstName}</h2>
+                                <h2>{`${account.firstName} ${account.lastName}`}</h2>
                                 <p>{account.email}</p>
                             </button>
                         ))
