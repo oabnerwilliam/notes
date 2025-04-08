@@ -12,7 +12,7 @@ function useSearch (list, setFiltered) {
         } else {
             setFiltered(list)
         }
-    }, [searchText])
+    }, [searchText, list, setFiltered])
     
     const searchItem = (e) => {
         setSearchText(e.target.value)
@@ -21,4 +21,4 @@ function useSearch (list, setFiltered) {
     return {searchItem}
 }   
 
-export default useSearch
+export {useSearch}

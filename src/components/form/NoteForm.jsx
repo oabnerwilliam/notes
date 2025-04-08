@@ -2,11 +2,15 @@ import React, { useEffect, useRef, useState } from 'react'
 
 import style from './NoteForm.module.css'
 
+import { useAuth } from '../../contexts/AuthContext'
+
 const NoteForm = ({handleSubmit}) => {
   const [note, setNote] = useState({})
   const [isFocused, setIsFocused] = useState(false)
 
   const formRef = useRef()
+
+  const {user} = useAuth()
   
   useEffect(()=>{
     const handleClickOutside = (e) => {
@@ -42,7 +46,9 @@ const NoteForm = ({handleSubmit}) => {
   const submit = () => {
     if(note.title && note.content) {
       handleSubmit(note)
-      setNote({title: "", content: ""})  
+      if (user) {
+        setNote({title: "", content: ""})   
+      }
     }
   }
   

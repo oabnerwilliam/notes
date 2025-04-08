@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import style from './Navbar.module.css'
 import { Link, useNavigate } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
-import Container from './Container'
 import AuthButton from './AuthButton'
 
 import {useAuth} from '../../contexts/AuthContext'
-import Loader from './Loader'
 
 const Navbar = () => {
     const {user, logout, isLoading} = useAuth()
@@ -21,7 +20,7 @@ const Navbar = () => {
     return (
         <>
             <nav className={`${style.navbar} ${isLoading ? style.loading : ''}`}>
-                <Container>
+                <div className={style.navContainer}>
                     <Link to="/" className={style.title}><h1>NOTES</h1></Link>
                     <ul>
                         {
@@ -38,7 +37,14 @@ const Navbar = () => {
                             ) : isLoading ? (
                                 <></>
                             ) : (
-                                <>
+                                <motion.div
+                                initial={{opacity: 0}}
+                                animate={{opacity: 1}}
+                                transition={{duration: 0.3}}
+                                style={{display: 'flex',
+                                    gap: '1em'
+                                }}
+                                >
                                     <AuthButton
                                     text="Entrar"
                                     color="green"
@@ -49,12 +55,11 @@ const Navbar = () => {
                                     color="white"
                                     type="link"
                                     to="/signup"/>
-                                </> 
+                                </motion.div> 
                             )
                         }
-                        
                     </ul>    
-                </Container>
+                </div>
             </nav>
         </>
     )

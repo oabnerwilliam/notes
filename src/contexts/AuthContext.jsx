@@ -9,14 +9,10 @@ const AuthProvider = ({children}) => {
     
     useEffect(()=>{
         const storedUser = localStorage.getItem("loggedUser")
-        const timer = setTimeout(()=>{
-            if (storedUser) {
-                setUser(JSON.parse(storedUser))
-            }
-            setIsLoading(false)    
-        }, 1000)
-
-        return () => clearTimeout(timer)
+        if (storedUser) {
+            setUser(JSON.parse(storedUser))
+        }
+        setIsLoading(false)
         /*const storedLocalUsers = localStorage.getItem("users")
         if(storedLocalUsers) {
             setLocalUsers(JSON.parse(storedLocalUsers))    
