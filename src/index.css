@@ -4,11 +4,31 @@
   padding: 0;
   font-family: "Josefin Sans", sans-serif;
 }
+
+:root {
+  --primary: aquamarine;
+  --primary-hover: hsl(160, 100%, 55%);
+  --secondary: black;
+  --secondary-hover: hsl(0, 0%, 20%);
+  --bg: #efefef;
+  --bg-hover: hsl(0, 0%, 74%);
+}
+
+.darkmode:root {
+  --primary: aquamarine;
+  --primary-hover: hsl(160, 100%, 55%);
+  --primary-text: black;
+  --secondary: white;
+  --secondary-hover: hsl(0, 0%, 80%);
+  --bg: hsl(0, 0%, 10%);
+  --bg-hover: hsl(0, 0%, 30%);
+}
+
 body, html, #root {
   height: 100vh;
-  background-color: #efefef;
+  background-color: var(--bg);
 }
 ::selection {
-  background-color: aquamarine;
-  color: black
+  background-color: var(--primary);
+  color: var(--primary-text)
 }

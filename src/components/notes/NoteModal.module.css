@@ -9,14 +9,15 @@
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -45%);
     overflow: hidden;
     transition: all 0.3s ease;
-    background-color: white;
+    background-color: var(--bg);
+    z-index: 2000;
     & input, textarea {
         outline: none;
         resize: none;
-        background-color: white;
+        background-color: var(--bg);
         border: none;
     }
 }
@@ -56,6 +57,7 @@
 
 .title, .content {
     white-space: normal;
+    color: var(--secondary)
 }
 
 .actions {
@@ -70,8 +72,9 @@
     border: none;
     font-size: 1.1em;
     transition: all 0.3s ease;
+    color: var(--secondary);
     &:hover {
         cursor: pointer;
-        color: #7fffd4;
+        color: var(--primary);
     }
 }

@@ -5,8 +5,17 @@
     justify-content: space-between;
 }
 
+.p-top {
+    padding-top: 112px;
+}
+
 .min-height {
     min-height: 75vh;
+}
+
+.router {
+    min-height: 75vh;
+    margin-top: 112px;
 }
 
 .start {

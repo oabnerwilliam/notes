@@ -1,6 +1,6 @@
 .footer {
-    background-color: black;
-    color: white;
+    background-color: var(--bg);
+    color: var(--secondary);
     min-height: 200px;
     display: flex;
     flex-direction: column;
@@ -13,7 +13,7 @@
 .footer p {
     font-size: 1.2em;
     & strong {
-        color: aquamarine;
+        color: var(--primary);
     }
 }
 
@@ -26,11 +26,11 @@
 }
 
 .icone {
-    color: white;
+    color: var(--secondary);
     font-size: 1.5em;
     & svg {
         &:hover {
-            fill: aquamarine;
+            fill: var(--primary);
             cursor: pointer;
         }
         transition: all 0.3s ease;

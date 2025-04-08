@@ -1,7 +1,28 @@
 .navbar {
     padding: 2em;
     height: 112px;
-    background-color: black;
+    background-color: var(--bg);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    &::after {
+        content: '';
+        height: 1px;
+        width: 100%;
+        background-color: black;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+}
+
+.scrolled {
+    box-shadow: 0 2px 5px 0 black;
+    &::after {
+        opacity: 0;
+    }
 }
 
 .navContainer {
@@ -28,19 +49,19 @@
 .title, .page {
     align-self: center;
     justify-self: flex-start;
-    color: white;
+    color: var(--secondary);
     text-decoration: none;
     transition: all 0.3s ease;
     position: relative;
     &:hover {
-        color:aquamarine;
+        color: var(--primary);
     }
     font-size: 1.2em;
 }
 
 .page::before {
     content: '';
-    background-color: aquamarine;
+    background-color: var(--primary);
     position: absolute;
     width: 100%;
     bottom: -5px;

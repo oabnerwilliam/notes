@@ -9,6 +9,7 @@ import {useAuth} from '../../contexts/AuthContext'
 
 const Navbar = () => {
     const {user, logout, isLoading} = useAuth()
+    const [scrolled, setScrolled] = useState(false);
 
     const navigate = useNavigate()
 
@@ -17,9 +18,24 @@ const Navbar = () => {
         navigate("/")
     }
     
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 0) {
+                setScrolled(true);
+            } else {
+                setScrolled(false);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
     return (
         <>
-            <nav className={`${style.navbar} ${isLoading ? style.loading : ''}`}>
+            <nav className={`${style.navbar} ${scrolled ? style.scrolled : ''}`}>
                 <div className={style.navContainer}>
                     <Link to="/" className={style.title}><h1>NOTES</h1></Link>
                     <ul>
@@ -28,9 +44,9 @@ const Navbar = () => {
                                 <>
                                     <AuthButton text={user.firstName}
                                     type="link"
-                                    color="white"/>
+                                    color="page"/>
                                     <AuthButton text="Sair" 
-                                    color="green"
+                                    color="color"
                                     type="button"
                                     handleOnClick={handleLogout}/>    
                                 </>
@@ -47,12 +63,12 @@ const Navbar = () => {
                                 >
                                     <AuthButton
                                     text="Entrar"
-                                    color="green"
+                                    color="color"
                                     type="link"
                                     to="/login"/>
                                     <AuthButton
                                     text="Criar Conta"
-                                    color="white"
+                                    color="page"
                                     type="link"
                                     to="/signup"/>
                                 </motion.div> 

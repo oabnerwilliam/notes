@@ -4,13 +4,14 @@
     height: 200px;
     max-height: auto ;
     width: 600px;
-    border: 1px solid black;
+    border: 1px solid var(--secondary);
     transition: all 0.3s ease;
     & input, textarea {
         outline: none;
         padding: 0.5em;
         resize: none;
-        background-color: #efefef;
+        background-color: var(--bg);
+        color: var(--secondary)
     }
 }
 .title {
@@ -24,12 +25,4 @@
     height: 70%;
     font-size: 1.2em;
     border: none;
-}
-.submitButton {
-    border: none;
-    transition: all 0.3s ease;
-    &:hover {
-        cursor: pointer;
-        background-color: hsl(0, 0%, 84%);
-    }
 }

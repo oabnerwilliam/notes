@@ -18,15 +18,15 @@ const Home = () => {
             <>
               <h1>Olá, <span>{user.firstName}</span></h1>
               <p>Bem-vindo de volta ao seu bloco de notas virtual!</p>
-              <LinkButton to="/mynotes" text="Minhas Notas" color="black"/>
+              <LinkButton to="/mynotes" text="Minhas Notas" color="color"/>
             </>
           ) : (
             <>
               <h1><span>NOTES</span></h1>
               <p>O seu bloco de notas virtual.</p>
               <div className={style.links}>
-                <LinkButton to="/login" text="Entrar" color="green"/>
-                <LinkButton to="/signup" text="Criar Conta" color="black"/>
+                <LinkButton to="/login" text="Entrar" color="color"/>
+                <LinkButton to="/signup" text="Criar Conta" color="page"/>
               </div>
             </>
 

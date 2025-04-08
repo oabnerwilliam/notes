@@ -10,13 +10,23 @@ import Home from './components/pages/Home'
 import MyNotes from './components/pages/MyNotes'
 import SignUpPage from './components/pages/SignUpPage'
 import LoginPage from './components/pages/LoginPage'
+import DarkButton from './components/layout/darkmode/DarkButton'
 
 function App() {
+  useEffect(()=>{
+    const dark = localStorage.getItem("darkmode")
+    if (dark) {
+      document.documentElement.classList.add("darkmode")
+    } else {
+      document.documentElement.classList.remove("darkmode")
+    }
+  }, [])
+
   return (
     <div className='App'>
       <Router>
         <Navbar/>
-        <Container customClass="min-height">
+        <Container customClass="router">
           <Routes>
             <Route path="/" element={<Home/>}/>
             <Route path="/mynotes" element={<MyNotes/>}/>
@@ -25,6 +35,7 @@ function App() {
           </Routes>
         </Container>
         <Footer/>
+        <DarkButton/>
       </Router>
     </div>
   )

@@ -8,22 +8,23 @@
     text-decoration: none;
     width: auto;
     font-size: .9em;
+    border: none;
 }
 
-.green {
-    background-color: aquamarine;
-    color: black;
+.color {
+    background-color: var(--primary);
+    color: var(--primary-text);
     &:hover {
-        background-color: hsl(160, 100%, 55%);
+        background-color: var(--primary-hover);
         cursor: pointer;
     }
 }
 
-.white {
-    background-color: white;
-    color: black;
+.page {
+    background-color: var(--secondary);
+    color: var(--bg);
     &:hover {
-        background-color: hsl(0, 0%, 80%);
+        background-color: var(--secondary-hover);
         cursor: pointer;
     }
 }

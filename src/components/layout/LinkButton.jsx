@@ -10,13 +10,6 @@ const LinkButton = ({to, text, color}) => {
   return (
     <>
       <Link to={to} className={`${style.btn} ${style[color]}`}>{text}</Link>
-      {/*<div className={style.container}>
-        <Link to={to} 
-        className={style.animatedButton}>
-          <FaPen/>
-          <span>{text}</span>
-        </Link>
-      </div>*/}
     </>
   )
 }

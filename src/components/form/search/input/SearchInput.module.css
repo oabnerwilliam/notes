@@ -9,9 +9,9 @@
 .search .overlay {
     position: absolute;
     left: -2.5em;
-    width: calc(100% + 2.5em);
+    width: calc(100% + 2.6em);
     height: 100%;
-    background-color: #efefef;
+    background-color: var(--bg);
     border: none;
     display: flex;
     align-items: center;
@@ -32,12 +32,16 @@
         transition: all ease 0.3s;
         &:hover {
             cursor: pointer;
-            background-color: hsl(0, 0%, 80%);
+            background-color: var(--primary);
+            & svg {
+                fill: var(--primary-text)
+            }
         }
     }
     & svg {
         font-size: 1.5em;
-        fill: black;
+        fill: var(--secondary);
+        transition: all ease 0.3s;
     }
 }
 
@@ -52,7 +56,9 @@
     border: none;
     border: 1px solid white;
     height: 3.5em;
+    background-color: var(--bg);
+    color: var(--secondary);
     &:focus {
-        border: 1px solid black;
+        border: 1px solid var(--secondary);
     }
 }

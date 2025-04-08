@@ -11,7 +11,8 @@
     padding: .5em;
     font-size: 1.3em;
     background-color: inherit;
-    border: 1px solid black;
+    color: var(--secondary);
+    border: 1px solid var(--secondary);
     outline: none;
     width: 100%;
 }
@@ -33,7 +34,7 @@
     background-color: transparent;
     transition: all ease 0.3s;
         &:hover {
-            fill: aquamarine;
+            fill: var(--primary);
             cursor: pointer;
         }
 }
@@ -42,11 +43,11 @@
     padding: 1em;
     align-self: center;
     width: 80%;
-    background-color: black;
-    color: aquamarine;
+    background-color: var(--secondary);
+    color: var(--bg);
     transition: all 0.3s ease;
     &:hover {
         cursor: pointer;
-        background-color: hsl(0, 0%, 20%);
+        background-color: var(--secondary-hover);
     }
 }

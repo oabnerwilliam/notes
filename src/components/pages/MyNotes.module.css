@@ -6,8 +6,8 @@
     margin: 3em;
     width: 100%;
     & h1 {
-        background-color: black;
-        color: aquamarine;
+        background-color: var(--primary);
+        color: var(--primary-text);
         padding: .3em;
     }
 }

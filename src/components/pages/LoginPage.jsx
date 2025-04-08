@@ -65,7 +65,7 @@ const LoginPage = () => {
             }
             <h1>Entrar</h1>
             <UserForm type="login" btnText="Entrar" handleOnChange={handleOnChange} handleSubmit={handleLogin}/>
-            <LinkButton to="/signup" text="Fazer Cadastro" color="green"/>
+            <LinkButton to="/signup" text="Fazer Cadastro" color="color"/>
         </div>  
     )
 }

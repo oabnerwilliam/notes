@@ -3,7 +3,7 @@
 }
 
 .success {
-    background-color: aquamarine;
+    background-color: var(--primary);
     color: black
 }
 
