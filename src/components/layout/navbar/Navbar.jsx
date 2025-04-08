@@ -3,13 +3,14 @@ import style from './Navbar.module.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
-import AuthButton from './AuthButton'
+import AuthButton from '../authbutton/AuthButton'
 
-import {useAuth} from '../../contexts/AuthContext'
+import {useAuth} from '../../../contexts/AuthContext'
+import DropDown from '../dropdown/DropDown'
 
 const Navbar = () => {
     const {user, logout, isLoading} = useAuth()
-    const [scrolled, setScrolled] = useState(false);
+    const [scrolled, setScrolled] = useState(false)
 
     const navigate = useNavigate()
 
@@ -51,6 +52,7 @@ const Navbar = () => {
                                 >
                                     <AuthButton text={user.firstName}
                                     type="link"
+                                    to="/accounts"
                                     color="page"/>
                                     <AuthButton text="Sair" 
                                     color="color"
@@ -72,7 +74,7 @@ const Navbar = () => {
                                     text="Entrar"
                                     color="color"
                                     type="link"
-                                    to="/login"/>
+                                    to="/accounts"/>
                                     <AuthButton
                                     text="Criar Conta"
                                     color="page"

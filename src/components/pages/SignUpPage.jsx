@@ -6,8 +6,8 @@ import { FaEye } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 
 import UserForm from '../form/UserForm'
-import LinkButton from '../layout/LinkButton'
-import Message from '../layout/Message'
+import LinkButton from '../layout/linkbutton/LinkButton'
+import Message from '../layout/message/Message'
 
 const SignUpPage = () => {
   const [user, setUser] = useState({})

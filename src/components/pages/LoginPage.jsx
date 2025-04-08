@@ -3,10 +3,10 @@ import UserForm from '../form/UserForm'
 import style from './LoginPage.module.css'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import LinkButton from '../layout/LinkButton'
+import LinkButton from '../layout/linkbutton/LinkButton'
 
 import { useAuth } from '../../contexts/AuthContext'
-import Message from '../layout/Message'
+import Message from '../layout/message/Message'
 
 const LoginPage = () => {
     const [existingUsers, setExistingUsers] = useState([])

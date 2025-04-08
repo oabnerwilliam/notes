@@ -9,9 +9,9 @@ import SearchInput from '../form/search/input/SearchInput'
 import { useAuth } from '../../contexts/AuthContext'
 import { useSearch } from '../../hooks/search/useSearch'
 
-import Loader from '../layout/Loader'
-import LinkButton from '../layout/LinkButton'
-import Message from '../layout/Message'
+import Loader from '../layout/loader/Loader'
+import LinkButton from '../layout/linkbutton/LinkButton'
+import Message from '../layout/message/Message'
 
 import {get, post, put, remove} from '../../util/requests/api'
 

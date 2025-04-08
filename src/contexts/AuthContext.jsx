@@ -22,10 +22,15 @@ const AuthProvider = ({children}) => {
     function login(userData) {
         setUser(userData)
         localStorage.setItem("loggedUser", JSON.stringify(userData))
-        /*setLocalUsers({
-            ...localUsers,
-            userData
-        })*/
+        
+        const accounts = JSON.parse(localStorage.getItem('loggedAccounts')) || []
+
+        const alreadyExists = accounts.some(acc => acc.email === userData.email)
+
+        if (!alreadyExists) {
+            accounts.push(userData)
+            localStorage.setItem('loggedAccounts', JSON.stringify(accounts))
+        }
     }
 
     /*useEffect(()=>{

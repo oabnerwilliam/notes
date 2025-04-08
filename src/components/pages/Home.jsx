@@ -3,10 +3,10 @@ import React, { useEffect, useState } from 'react'
 import style from './Home.module.css'
 
 import notes from '../../img/notes.svg'
-import LinkButton from '../layout/LinkButton'
+import LinkButton from '../layout/linkbutton/LinkButton'
 
 import { useAuth } from '../../contexts/AuthContext'
-import Loader from '../layout/Loader'
+import Loader from '../layout/loader/Loader'
 
 const Home = () => {
   const {user} = useAuth()
@@ -26,7 +26,7 @@ const Home = () => {
               <h1><span>NOTES</span></h1>
               <p>O seu bloco de notas virtual.</p>
               <div className={style.links}>
-                <LinkButton to="/login" text="Entrar" color="color"/>
+                <LinkButton to="/accounts" text="Entrar" color="color"/>
                 <LinkButton to="/signup" text="Criar Conta" color="page"/>
               </div>
             </>

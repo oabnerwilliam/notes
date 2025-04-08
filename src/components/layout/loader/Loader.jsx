@@ -2,8 +2,6 @@ import React from 'react'
 
 import style from './Loader.module.css' 
 
-import loader from '../../img/loading.svg'
-
 const Loader = ({fullScreen = false}) => {
   return (
     <div className={`${style.loaderContainer}
