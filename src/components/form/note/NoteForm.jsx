@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 
 import style from './NoteForm.module.css'
 
-import { useAuth } from '../../contexts/AuthContext'
+import { useAuth } from '../../../contexts/AuthContext'
 
 const NoteForm = ({handleSubmit}) => {
   const [note, setNote] = useState({})

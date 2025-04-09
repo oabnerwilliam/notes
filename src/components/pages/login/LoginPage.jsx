@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import UserForm from '../form/UserForm'
+import UserForm from '../../form/auth/UserForm'
 import style from './LoginPage.module.css'
 import { useNavigate } from 'react-router-dom'
-import { Link } from 'react-router-dom'
-import LinkButton from '../layout/linkbutton/LinkButton'
+import LinkButton from '../../layout/linkbutton/LinkButton'
 
-import { useAuth } from '../../contexts/AuthContext'
-import Message from '../layout/message/Message'
+import { useAuth } from '../../../contexts/AuthContext'
+import Message from '../../layout/message/Message'
 
 const LoginPage = () => {
     const [existingUsers, setExistingUsers] = useState([])

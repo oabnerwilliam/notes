@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
-import { useAuth } from '../../contexts/AuthContext'
+import { useAuth } from '../../../contexts/AuthContext'
 import style from  './Accounts.module.css'
 import { useNavigate } from 'react-router-dom'
 
-import LinkButton from '../layout/linkbutton/LinkButton'
+import LinkButton from '../../layout/linkbutton/LinkButton'
 
 const Accounts = () => {
     const [accounts, setAccounts] = useState([])

@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 import style from './Home.module.css'
 
-import notes from '../../img/notes.svg'
-import LinkButton from '../layout/linkbutton/LinkButton'
+import notes from '../../../img/notes.svg'
+import LinkButton from '../../layout/linkbutton/LinkButton'
 
-import { useAuth } from '../../contexts/AuthContext'
-import Loader from '../layout/loader/Loader'
+import { useAuth } from '../../../contexts/AuthContext'
 
 const Home = () => {
   const {user, loggedAccounts} = useAuth()

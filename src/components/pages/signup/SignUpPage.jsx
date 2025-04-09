@@ -2,12 +2,11 @@ import React, { use, useEffect, useState } from 'react'
 
 import style from './SignUpPage.module.css'
 
-import { FaEye } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 
-import UserForm from '../form/UserForm'
-import LinkButton from '../layout/linkbutton/LinkButton'
-import Message from '../layout/message/Message'
+import UserForm from '../../form/auth/UserForm'
+import LinkButton from '../../layout/linkbutton/LinkButton'
+import Message from '../../layout/message/Message'
 
 const SignUpPage = () => {
   const [user, setUser] = useState({})

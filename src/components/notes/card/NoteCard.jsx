@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import style from './NoteCard.module.css'
 import { FaTrash, FaPencilAlt } from 'react-icons/fa'
 import { FaX } from 'react-icons/fa6'
-import NoteModal from './NoteModal'
+import NoteModal from '../modal/NoteModal'
 import { AnimatePresence, motion } from 'framer-motion'
 
 const NoteCard = ({note, handleDelete, handleSubmit}) => {

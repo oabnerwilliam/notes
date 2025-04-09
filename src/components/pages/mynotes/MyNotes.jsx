@@ -2,18 +2,19 @@ import React, { useEffect, useState } from 'react'
 
 import style from './MyNotes.module.css'
 
-import NoteForm from '../form/NoteForm'
-import NoteCard from '../notes/NoteCard'
-import SearchInput from '../form/search/input/SearchInput'
+import NoteForm from '../../form/note/NoteForm'
+import NoteCard from '../../notes/card/NoteCard'
+import SearchInput from '../../form/search/SearchInput'
 
-import { useAuth } from '../../contexts/AuthContext'
-import { useSearch } from '../../hooks/search/useSearch'
+import { useAuth } from '../../../contexts/AuthContext'
+import { useSearch } from '../../../hooks/search/useSearch'
 
-import Loader from '../layout/loader/Loader'
-import LinkButton from '../layout/linkbutton/LinkButton'
-import Message from '../layout/message/Message'
+import Loader from '../../layout/loader/Loader'
+import LinkButton from '../../layout/linkbutton/LinkButton'
+import Message from '../../layout/message/Message'
 
-import {get, post, put, remove} from '../../util/requests/api'
+import {get, post, put, remove} from '../../../util/requests/api'
+import userFilter from '../../../util/filters/userfilter/userFilter'
 
 const MyNotes = () => {
   const [notes, setNotes] = useState([])
@@ -51,6 +52,8 @@ const MyNotes = () => {
       }).slice().reverse()
       handleSetFilteredNotes(firstFilter)
     }
+    /*const firstFilter = userFilter(notes, user).slice().reverse()
+    handleSetFilteredNotes(firstFilter)*/
   }, [notes, user])
 
   useEffect(()=>{
