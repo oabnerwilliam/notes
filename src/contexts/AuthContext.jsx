@@ -4,7 +4,7 @@ const AuthContext = createContext()
 
 const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null)
-    const [isLoading, setIsLoading] = useState(true)
+    const [loggedAccounts, setLoggedAccounts] = useState([])
     //const [localUsers, setLocalUsers] = useState(null)
     
     useEffect(()=>{
@@ -12,7 +12,6 @@ const AuthProvider = ({children}) => {
         if (storedUser) {
             setUser(JSON.parse(storedUser))
         }
-        setIsLoading(false)
         /*const storedLocalUsers = localStorage.getItem("users")
         if(storedLocalUsers) {
             setLocalUsers(JSON.parse(storedLocalUsers))    
@@ -29,6 +28,7 @@ const AuthProvider = ({children}) => {
 
         if (!alreadyExists) {
             accounts.push(userData)
+            setLoggedAccounts(accounts)
             localStorage.setItem('loggedAccounts', JSON.stringify(accounts))
         }
     }
@@ -48,7 +48,7 @@ const AuthProvider = ({children}) => {
 
     return (
         <AuthContext.Provider
-        value={{user, isLoading, login, logout}}>
+        value={{user, loggedAccounts, login, logout}}>
             {children}
         </AuthContext.Provider>
     )

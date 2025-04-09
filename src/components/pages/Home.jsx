@@ -9,7 +9,7 @@ import { useAuth } from '../../contexts/AuthContext'
 import Loader from '../layout/loader/Loader'
 
 const Home = () => {
-  const {user} = useAuth()
+  const {user, loggedAccounts} = useAuth()
 
   return (
     <>
@@ -26,7 +26,7 @@ const Home = () => {
               <h1><span>NOTES</span></h1>
               <p>O seu bloco de notas virtual.</p>
               <div className={style.links}>
-                <LinkButton to="/accounts" text="Entrar" color="color"/>
+                <LinkButton to={loggedAccounts && loggedAccounts.length > 0 ? "/accounts" : "/login"} text="Entrar" color="color"/>
                 <LinkButton to="/signup" text="Criar Conta" color="page"/>
               </div>
             </>

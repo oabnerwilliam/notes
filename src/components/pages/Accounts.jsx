@@ -29,6 +29,8 @@ const Accounts = () => {
             <div className={style.accountList}>
                 {
                     accounts && (
+                        <div className={style.accountList}>
+                        {
                         accounts.map((account)=>(
                             <button className={style.account}
                             onClick={handleOnClick(account)}
@@ -36,7 +38,9 @@ const Accounts = () => {
                                 <h2>{`${account.firstName} ${account.lastName}`}</h2>
                                 <p>{account.email}</p>
                             </button>
-                        ))
+                        ))    
+                        }
+                        </div>
                     )
                 }    
             </div>

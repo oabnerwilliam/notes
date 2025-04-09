@@ -6,10 +6,9 @@ import { motion } from 'framer-motion'
 import AuthButton from '../authbutton/AuthButton'
 
 import {useAuth} from '../../../contexts/AuthContext'
-import DropDown from '../dropdown/DropDown'
 
 const Navbar = () => {
-    const {user, logout, isLoading} = useAuth()
+    const {user, loggedAccounts, logout, isLoading} = useAuth()
     const [scrolled, setScrolled] = useState(false)
 
     const navigate = useNavigate()
@@ -26,12 +25,13 @@ const Navbar = () => {
             } else {
                 setScrolled(false);
             }
-        };
+        }
 
-        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', handleScroll)
+
         return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
+            window.removeEventListener('scroll', handleScroll)
+        }
     }, []);
 
     return (
@@ -51,8 +51,8 @@ const Navbar = () => {
                                 }}
                                 >
                                     <AuthButton text={user.firstName}
-                                    type="link"
-                                    to="/accounts"
+                                    type="button"
+                                    showAccounts="true"
                                     color="page"/>
                                     <AuthButton text="Sair" 
                                     color="color"
@@ -74,7 +74,7 @@ const Navbar = () => {
                                     text="Entrar"
                                     color="color"
                                     type="link"
-                                    to="/accounts"/>
+                                    to={loggedAccounts && loggedAccounts.length>0 ? "/accounts" : "/login"}/>
                                     <AuthButton
                                     text="Criar Conta"
                                     color="page"

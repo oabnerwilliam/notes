@@ -10,6 +10,7 @@ const NoteModal = ({handleSubmit, handleDelete, note, toggleEditing}) => {
     const [isFocused, setIsFocused] = useState(false)
     
     const formRef = useRef() 
+    const textRef = useRef()
     
     const handleOnChange = (e) => {
         setCurrentNote({
@@ -45,9 +46,21 @@ const NoteModal = ({handleSubmit, handleDelete, note, toggleEditing}) => {
         setIsFocused(false)
     }
 
-    const submit = () => {
-        handleSubmit(currentNote)
-        //toggleEditing()
+    const autoGrow = (e) => {
+        const textarea = textRef.current
+        if (textarea) {
+          textarea.style.height = "auto"
+          textarea.style.overflowY = "hidden";
+          textarea.style.height = `${textarea.scrollHeight}px`
+    
+          if (textarea.scrollHeight>600) {
+            textarea.style.height = "600px"
+            textarea.style.overflowY = "auto";
+          }
+        }
+        setCurrentNote({
+          [e.target.name]: e.target.value
+        })
     }
 
     return (
@@ -76,10 +89,12 @@ const NoteModal = ({handleSubmit, handleDelete, note, toggleEditing}) => {
                     name="content" 
                     id="" 
                     className={style.content} 
+                    ref={textRef}
                     placeholder="Escreva sua nota..." 
                     onChange={handleOnChange}
                     onFocus={handleFocus}
                     onBlur={handleBlur}
+                    onInput={autoGrow}
                     value={currentNote.content || ''}  
                     required/>
                 <div className={style.actions}>

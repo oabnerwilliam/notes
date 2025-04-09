@@ -11,6 +11,10 @@
     border: none;
 }
 
+.btnContainer {
+    position: relative;
+}
+
 .color {
     background-color: var(--primary);
     color: var(--primary-text);

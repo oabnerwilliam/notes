@@ -8,7 +8,8 @@ const NoteForm = ({handleSubmit}) => {
   const [note, setNote] = useState({})
   const [isFocused, setIsFocused] = useState(false)
 
-  const formRef = useRef()
+  const formRef = useRef(null)
+  const textRef = useRef(null)
 
   const {user} = useAuth()
   
@@ -43,6 +44,24 @@ const NoteForm = ({handleSubmit}) => {
     setIsFocused(false)
   }
 
+  const autoGrow = (e) => {
+    const textarea = textRef.current
+    if (textarea) {
+      textarea.style.height = "auto"
+      textarea.style.overflowY = "hidden";
+      textarea.style.height = `${textarea.scrollHeight}px`
+
+      if (textarea.scrollHeight>300) {
+        textarea.style.height = "300px"
+        textarea.style.overflowY = "auto";
+      }
+    }
+    setNote({
+      "title":note.title,
+      "content":e.target.value
+    })
+  }
+
   const submit = () => {
     if(note.title && note.content) {
       handleSubmit(note)
@@ -69,9 +88,11 @@ const NoteForm = ({handleSubmit}) => {
         name="content" 
         id="" 
         className={style.content} 
+        ref={textRef}
         placeholder="Escreva sua nota..." 
         onChange={handleOnChange}
         value={note.content || ''}
+        onInput={autoGrow}
         onFocus={handleFocus}
         onBlur={handleBlur}  
         required/>

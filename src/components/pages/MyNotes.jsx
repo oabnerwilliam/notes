@@ -54,6 +54,10 @@ const MyNotes = () => {
   }, [notes, user])
 
   useEffect(()=>{
+    setIsLoading(true)
+  }, [user])
+
+  useEffect(()=>{
     if (isLoading) {
       const timer = setTimeout(()=>{
         setSearchFiltered(filteredNotes)
@@ -63,7 +67,7 @@ const MyNotes = () => {
     } else {
       setSearchFiltered(filteredNotes)
     }
-  }, [filteredNotes])
+  }, [filteredNotes, user])
 
   const createNote = async (note) => {
     if (user) {

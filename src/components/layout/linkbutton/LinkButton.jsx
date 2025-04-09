@@ -6,10 +6,13 @@ import style from './LinkButton.module.css'
 
 import { FaPen } from 'react-icons/fa'
 
-const LinkButton = ({to, text, color}) => {
+const LinkButton = ({to, text, color, handleOnClick}) => {
   return (
     <>
-      <Link to={to} className={`${style.btn} ${style[color]}`}>{text}</Link>
+      <Link to={to} 
+      className={`${style.btn} 
+      ${style[color]}`}
+      onClick={handleOnClick}>{text}</Link>
     </>
   )
 }

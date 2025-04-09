@@ -1,8 +1,10 @@
 .form {
     display: flex;
     flex-direction: column;
-    height: 200px;
-    max-height: auto ;
+    /* height: 200px; */
+    min-height: 200px;
+    height: auto;
+    max-height: 500px;
     width: 600px;
     border: 1px solid var(--secondary);
     transition: all 0.3s ease;
