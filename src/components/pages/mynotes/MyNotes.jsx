@@ -2,19 +2,23 @@ import React, { useEffect, useState } from 'react'
 
 import style from './MyNotes.module.css'
 
-import NoteForm from '../../form/note/NoteForm'
+import NoteForm from '../../notes/form/NoteForm'
 import NoteCard from '../../notes/card/NoteCard'
 import SearchInput from '../../form/search/SearchInput'
-
-import { useAuth } from '../../../contexts/AuthContext'
-import { useSearch } from '../../../hooks/search/useSearch'
 
 import Loader from '../../layout/loader/Loader'
 import LinkButton from '../../layout/linkbutton/LinkButton'
 import Message from '../../layout/message/Message'
 
-import {get, post, put, remove} from '../../../util/requests/api'
+import { useAuth } from '../../../contexts/AuthContext'
+import { useSearch } from '../../../hooks/search/useSearch'
+
+import {get} from '../../../util/requests/api'
+
 import userFilter from '../../../util/filters/userfilter/userFilter'
+import createItem from '../../../util/actions/createItem'
+import editItem from '../../../util/actions/editItem'
+import deleteItem from '../../../util/actions/deleteItem'
 
 const MyNotes = () => {
   const [notes, setNotes] = useState([])
@@ -27,19 +31,11 @@ const MyNotes = () => {
 
   const {searchItem} = useSearch(filteredNotes, setSearchFiltered)
   
-  const handleSetNotes = (item) => {
-    setNotes(item)
-  }
-
-  const handleSetFilteredNotes = (item) => {
-    setFilteredNotes(item)
-  }
-  
   useEffect(() => {
     const getNotes = async () => {
       if (user) {
         const list = await get("http://localhost:5000/notes")
-        handleSetNotes(list)
+        setNotes(list)
       }
     }
     getNotes()
@@ -47,13 +43,8 @@ const MyNotes = () => {
 
   useEffect(()=>{
     if (user) {
-      const firstFilter = notes.filter((note) => {
-        return note.userId===user.id
-      }).slice().reverse()
-      handleSetFilteredNotes(firstFilter)
+      setFilteredNotes(userFilter(notes, user).slice().reverse())  
     }
-    /*const firstFilter = userFilter(notes, user).slice().reverse()
-    handleSetFilteredNotes(firstFilter)*/
   }, [notes, user])
 
   useEffect(()=>{
@@ -78,11 +69,10 @@ const MyNotes = () => {
         ...note,
         ["userId"]: user.id
       }
-      const data = await post("http://localhost:5000/notes", note)
-      setNotes((notes)=>[
-        ...notes,
-        data
-      ])
+
+      const newNotes = await createItem("http://localhost:5000/notes", note, notes)
+      setNotes(newNotes)
+
       setIsLoading(false)
     } else {
       setMessage("Você não pode criar notas sem estar conectado.")
@@ -94,20 +84,22 @@ const MyNotes = () => {
 
   const editNote = async (note) => {
     if (user) {
-      const data = await put(`http://localhost:5000/notes/${note.id}`, note)
-      console.log("Projeto editado com sucesso!")
-      setNotes((prevNotes)=>
-        prevNotes.map((note)=>(note.id === data.id ? data : note))
-      )
+      const newNotes = await editItem(`http://localhost:5000/notes/${note.id}`, note, notes)
+
+      setNotes(newNotes)
+      
+      console.log("Nota editada com sucesso!")
       setIsLoading(false)
     }
   }
 
-  const deleteNote = async (id) => {
+  const deleteNote = async (note) => {
     if (user) {
-      const data = await remove(`http://localhost:5000/notes/${id}`)
-      console.log("Projeto excluido com sucesso!", data)
-      setNotes((notes)=>notes.filter((note)=>note.id!==id))
+      const newNotes = await deleteItem(`http://localhost:5000/notes/${note.id}`, note, notes)
+
+      setNotes(newNotes)
+
+      console.log("Nota excluída com sucesso!")
       setIsLoading(false)
     }
   }
@@ -146,7 +138,7 @@ const MyNotes = () => {
                     searchFiltered.map((note)=>(
                       <NoteCard note={note}
                       key={note.id}
-                      handleDelete={()=>deleteNote(note.id)}
+                      handleDelete={()=>deleteNote(note)}
                       handleSubmit={editNote}
                       />
                     ))  

@@ -7,6 +7,9 @@ import LinkButton from '../../layout/linkbutton/LinkButton'
 import { useAuth } from '../../../contexts/AuthContext'
 import Message from '../../layout/message/Message'
 
+import {get} from '../../../util/requests/api'
+import loginUser from '../../../util/authfunctions/loginUser'
+
 const LoginPage = () => {
     const [existingUsers, setExistingUsers] = useState([])
     const [currentUser, setCurrentUser] = useState({})
@@ -17,17 +20,11 @@ const LoginPage = () => {
     const navigate = useNavigate()
 
     useEffect(()=>{
-        fetch("http://localhost:5000/users", {
-            method: "GET",
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(resp=>resp.json())
-        .then((data)=>{
-            setExistingUsers(data)
-        })
-        .catch((err)=>console.log("Erro ao buscar usuários", err))
+        const getExistingUsers = async () => {
+            const users = await get("http://localhost:5000/users")
+            setExistingUsers(users)    
+        }
+        getExistingUsers()
     }, [])
 
     const handleOnChange = (e) => {
@@ -39,6 +36,7 @@ const LoginPage = () => {
 
     const handleLogin = (e) => {
         e.preventDefault()
+        //const message = loginUser(existingUsers, currentUser, "/mynotes", login)
         const foundUser = existingUsers.find((existingUser)=>existingUser.email===currentUser.email)
         if (foundUser) {
             if (foundUser.password===currentUser.password) {
@@ -49,8 +47,9 @@ const LoginPage = () => {
             }
         } else {
             setMessage("Usuário não existe.")
-        }
-        const timer = setTimeout(()=>{
+        }s
+        //setMessage(message)
+        setTimeout(()=>{
             setMessage("")
         }, 3000)
     }

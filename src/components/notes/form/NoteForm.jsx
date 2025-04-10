@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import style from './NoteForm.module.css'
 
 import { useAuth } from '../../../contexts/AuthContext'
+import clickOut from '../../../util/events/clickout/clickOut'
 
 const NoteForm = ({handleSubmit}) => {
   const [note, setNote] = useState({})
@@ -14,19 +15,13 @@ const NoteForm = ({handleSubmit}) => {
   const {user} = useAuth()
   
   useEffect(()=>{
-    const handleClickOutside = (e) => {
-      if (formRef.current &&
-        !formRef.current.contains(e.target) &&
-      isFocused) {
-          submit()
+    const cleanup = clickOut(formRef, ()=>{
+      if (isFocused) {
+        submit()  
       }
-    }
-    
-    document.addEventListener("mousedown", handleClickOutside)
+    })
 
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside)
-    }
+    return cleanup
   }, [note, isFocused])
 
   const handleOnChange = (e) => {

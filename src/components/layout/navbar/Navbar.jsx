@@ -6,6 +6,7 @@ import { motion } from 'framer-motion'
 import AuthButton from '../authbutton/AuthButton'
 
 import {useAuth} from '../../../contexts/AuthContext'
+import PageLink from '../navlink/PageLink'
 
 const Navbar = () => {
     const {user, loggedAccounts, logout, isLoading} = useAuth()

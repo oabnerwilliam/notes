@@ -4,6 +4,7 @@ import style from './DropDown.module.css'
 
 import { useAuth } from '../../../contexts/AuthContext'
 import LinkButton from '../linkbutton/LinkButton'
+import clickOut from '../../../util/events/clickout/clickOut'
 
 const DropDown = ({isOpen, setIsOpen}) => {
     const [accounts, setAccounts] = useState([])
@@ -12,18 +13,14 @@ const DropDown = ({isOpen, setIsOpen}) => {
     
     const {user, login} = useAuth()
 
-    const handleClickOutside = (e) => {
-        if(menuRef.current && !menuRef.current.contains(e.target)) {
-            setIsOpen(false)
-        }
-
-        document.removeEventListener('mousedown', handleClickOutside)
-    }
-
     useEffect(()=>{
-        document.addEventListener("mousedown", handleClickOutside)
-
         setAccounts(JSON.parse(localStorage.getItem("loggedAccounts")).slice().reverse())
+
+        const cleanup = clickOut(menuRef, ()=>{
+            setIsOpen(false)
+        })
+
+        return cleanup
     }, [isOpen, user])
 
     const handleOnClick = (account) => {

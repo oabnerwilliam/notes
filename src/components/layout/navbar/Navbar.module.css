@@ -46,7 +46,7 @@
     }
 }
 
-.title, .page {
+.title {
     align-self: center;
     justify-self: flex-start;
     color: var(--secondary);
@@ -57,20 +57,4 @@
         color: var(--primary);
     }
     font-size: 1.2em;
-}
-
-.page::before {
-    content: '';
-    background-color: var(--primary);
-    position: absolute;
-    width: 100%;
-    bottom: -5px;
-    height: 2px;
-    border-radius: 1em;
-    transform: scaleX(0);
-    transition: all ease 0.4s;
-}
-
-.page:hover::before {
-    transform: scaleX(100%);
 }

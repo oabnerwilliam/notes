@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import style from './NoteModal.module.css'
 import { FaX } from 'react-icons/fa6'
 import { FaTrash } from 'react-icons/fa'
+import clickOut from '../../../util/events/clickout/clickOut'
 
 const NoteModal = ({handleSubmit, handleDelete, note, toggleEditing}) => {
     const [currentNote, setCurrentNote] = useState(note)
@@ -20,22 +21,15 @@ const NoteModal = ({handleSubmit, handleDelete, note, toggleEditing}) => {
     }
 
     useEffect(()=>{
-        const handleClickOutside = (e) => {
-          if (formRef.current &&
-            !formRef.current.contains(e.target)) {
-              toggleEditing()
-              if (isFocused) {
-                handleSubmit(currentNote)
-                console.log(currentNote)
-              }
+        const cleanup = clickOut(formRef, ()=>{
+          toggleEditing()
+          if(isFocused) {
+            handleSubmit(currentNote)
+            console.log(currentNote)
           }
-        }
-        
-        document.addEventListener("mousedown", handleClickOutside)
-    
-        return () => {
-          document.removeEventListener("mousedown", handleClickOutside)
-        }
+        })
+
+        return cleanup
     }, [currentNote, isFocused])
 
     const handleFocus = () => {

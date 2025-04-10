@@ -3,6 +3,7 @@ import React from 'react'
 import { useRef, useState, useEffect } from 'react'
 import style from './SearchInput.module.css'
 import { FaSearch } from 'react-icons/fa'
+import clickOut from '../../../util/events/clickout/clickOut'
 
 const SearchInput = ({placeholder, handleOnChange}) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -10,18 +11,12 @@ const SearchInput = ({placeholder, handleOnChange}) => {
   const inputRef = useRef(null)
   const searchRef = useRef(null)
 
-  const handleClickOutside = (e) => {
-    if (!searchRef.current.contains(e.target)) {
-      setIsOpen(false)  
-    }
-  }
-
   useEffect(()=>{
-    document.addEventListener("mousedown", handleClickOutside)
+    const cleanup = clickOut(searchRef, ()=>{
+      setIsOpen(false)
+    })
 
-    return ()=>{
-      document.removeEventListener("mousedown", handleClickOutside)
-    }
+    return cleanup
   }, [])
 
   const openSearch = (e) => {
