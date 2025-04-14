@@ -34,7 +34,13 @@ const NoteCard = ({note, handleDelete, handleSubmit}) => {
             }}>
                 <div className={style.info}>
                     <h2>{currentNote.title}</h2>
-                    <p>{currentNote.content}</p>    
+                    {/* <p>{currentNote.content.split("\n").map((line, index)=>(
+                        <React.Fragment key={index}>
+                            {line}
+                            <br/>
+                        </React.Fragment>
+                    ))}</p>     */}
+                    <p>{currentNote.content.replace(/\n/g, ' ')}</p>
                 </div>
                 <div className={style.actions}>
                     <button 

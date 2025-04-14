@@ -5,14 +5,13 @@
     border: 1px solid var(--secondary);
     padding: .5em;
     padding-bottom: 1em;
-    min-width: 200px;
-    max-width: 100%;
     min-height: 200px;
     height: auto;
-    max-height: 280px;
     overflow: hidden;
     transition: all 0.3s ease;
     color: var(--secondary);
+    width: calc((100% - 3em) / 3); /* 3 colunas com gap de 1.5em entre */
+    min-width: 250px;
     &:hover {
         cursor: pointer;
         background-color: var(--bg-hover);
@@ -37,14 +36,15 @@
     padding: .5em;
 }
 
-.noteCard p {
+.noteCard .info p {
     font-size: 1.2em;
     display: -webkit-box;
+    -webkit-line-clamp: 9;
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
     overflow: hidden;
     line-clamp: 9;
-    -webkit-line-clamp: 9;
+    white-space: normal;
 }
 
 .actions {

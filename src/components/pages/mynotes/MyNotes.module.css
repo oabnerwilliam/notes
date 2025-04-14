@@ -17,8 +17,12 @@
     width: 600px;
 }
 .noteList {
-    display: grid;
+    /*display: grid;
     width: 100%;
     grid-template-columns: repeat(3, 1fr);
+    gap: 1.5em;*/
+    display: flex;
+    flex-wrap: wrap;
     gap: 1.5em;
+    justify-content: flex-start;
 }
