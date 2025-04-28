@@ -1,0 +1,1 @@
+{"root":["./global.d.ts","./src/utils.d.ts","./src/components/form/auth/userform.tsx","./src/components/form/search/searchinput.tsx","./src/util/events/clickout/clickout.ts"],"version":"5.8.3"}

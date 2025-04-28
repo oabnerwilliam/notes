@@ -1,0 +1,91 @@
+import { useEffect, useState } from 'react'
+import style from './Navbar.module.css'
+import { Link, useNavigate } from 'react-router-dom'
+import { motion } from 'framer-motion'
+
+import AuthButton from '../authbutton/AuthButton'
+
+import {useAuth} from '../../../contexts/AuthContext'
+
+const Navbar = () => {
+    const {user, loggedAccounts, logout} = useAuth() // tipar
+    const [scrolled, setScrolled] = useState<boolean>(false)
+
+    const navigate = useNavigate()
+
+    const handleLogout = (): void => {
+        logout()
+        navigate("/")
+    }
+    
+    useEffect(() => {
+        const handleScroll = (): void => {
+            if (window.scrollY > 0) {
+                setScrolled(true);
+            } else {
+                setScrolled(false);
+            }
+        }
+
+        window.addEventListener('scroll', handleScroll)
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll)
+        }
+    }, []);
+
+    return (
+        <>
+            <nav className={`${style.navbar} ${scrolled ? style.scrolled : ''}`}>
+                <div className={style.navContainer}>
+                    <Link to="/" className={style.title}><h1>NOTES</h1></Link>
+                    <ul>
+                        {
+                            user ? (
+                                <motion.div
+                                initial={{opacity: 0}}
+                                animate={{opacity: 1}}
+                                transition={{duration: 0.3}}
+                                style={{display: 'flex',
+                                    gap: '1em'
+                                }}
+                                >
+                                    <AuthButton text={user.firstName}
+                                    type="button"
+                                    showAccounts="true"
+                                    color="page"/>
+                                    <AuthButton text="Sair" 
+                                    color="color"
+                                    type="button"
+                                    handleOnClick={handleLogout}/>    
+                                </motion.div>
+                            ) : (
+                                <motion.div
+                                initial={{opacity: 0}}
+                                animate={{opacity: 1}}
+                                transition={{duration: 0.3}}
+                                style={{display: 'flex',
+                                    gap: '1em'
+                                }}
+                                >
+                                    <AuthButton
+                                    text="Entrar"
+                                    color="color"
+                                    type="link"
+                                    to={loggedAccounts && loggedAccounts.length>0 ? "/accounts" : "/login"}/>
+                                    <AuthButton
+                                    text="Criar Conta"
+                                    color="page"
+                                    type="link"
+                                    to="/signup"/>
+                                </motion.div> 
+                            )
+                        }
+                    </ul>    
+                </div>
+            </nav>
+        </>
+    )
+}
+
+export default Navbar
