@@ -1,9 +1,7 @@
 import React from 'react'
 
 import { useRef, useState, useEffect } from 'react'
-import style from './SearchInput.module.css'
 import { FaSearch } from 'react-icons/fa'
-//import clickOut from '../../../util/events/clickout/clickOut'
 import clickOut from "../../../util/events/clickout/clickOut"
 
 type SearchInputProps = {
@@ -31,17 +29,47 @@ const SearchInput = ({placeholder, handleOnChange}: SearchInputProps) => {
   }
   
   return (
-    <div className={style.search} ref={searchRef}>
-        <div className={`${style.overlay} ${isOpen ? style.open : ''}`}>
-        <button onClick={openSearch}>
-            <FaSearch/>
-        </button>
+    <div 
+    className='flex justify-between items-center gap-4 relative'
+    ref={searchRef}>
+        <div 
+        className='absolute
+        -left-10
+        h-full
+        bg-bg
+        border-none
+        flex items-center justify-center
+        rounded-4xl
+        transition-[width] ease-in-out duration-300'
+        style={{ width: isOpen ? '2.5rem' : 'calc(100% + 2.6em)' }}>
+          <button onClick={openSearch}
+          className='bg-transparent
+          border-none
+          flex justify-center items-center
+          h-14 w-14
+          rounded-full
+          absolute right-4
+          transition-all
+          ease-in-out
+          duration-300
+          cursor-pointer
+          hover:bg-primary
+          group'>
+              <FaSearch className='group-hover:fill-p-text text-xl fill-secondary transition-all ease-in-out duration-300'/>
+          </button>
         </div>
         <input type="text" 
         name="search" 
         id="search"
         onChange={handleOnChange}
-        className={style.input}
+        className='p-3
+        rounded-4xl
+        outline-none
+        border border-white
+        h-14
+        bg-bg
+        text-secondary
+        focus:border-secondary'
         placeholder={placeholder}
         ref={inputRef}/> 
     </div>

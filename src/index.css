@@ -1,3 +1,6 @@
+@tailwind utilities;
+@import "tailwindcss";
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -5,10 +8,48 @@
   font-family: "Josefin Sans", sans-serif;
 }
 
+h1 {
+  font-weight: bold;
+  font-size: 2em;
+}
+
+h2 {
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+h3 {
+  font-weight: bold;
+  font-size: 1.3em;
+}
+
+@theme {
+  --color-primary: hsl(160, 100%, 75%);
+  --color-p-hover: hsl(160, 100%, 55%);
+  --color-p-text: #000000;
+  --color-secondary: #000000;
+  --color-s-hover: hsl(0, 0%, 20%);
+  --color-bg: #efefef;
+  --bg-hover: hsl(0, 0%, 74%);
+}
+
+ 
+
+.darkmode {
+  --color-primary: hsl(160, 100%, 75%);
+  --color-p-hover: hsl(160, 100%, 55%);
+  --color-p-text: #000000;
+  --color-secondary: #ffffff;
+  --color-s-hover: hsl(0, 0%, 80%);
+  --color-bg: hsl(0, 0%, 10%);
+  --bg-hover: hsl(0, 0%, 30%);
+}
+
 :root {
-  --primary: aquamarine;
+  --primary: hsl(160, 100%, 75%);
   --primary-hover: hsl(160, 100%, 55%);
-  --secondary: black;
+  --primary-text: black;
+  --secondary: #000000;
   --secondary-hover: hsl(0, 0%, 20%);
   --bg: #efefef;
   --bg-hover: hsl(0, 0%, 74%);
@@ -18,10 +59,14 @@
   --primary: aquamarine;
   --primary-hover: hsl(160, 100%, 55%);
   --primary-text: black;
-  --secondary: white;
+  --secondary: #ffffff;
   --secondary-hover: hsl(0, 0%, 80%);
   --bg: hsl(0, 0%, 10%);
   --bg-hover: hsl(0, 0%, 30%);
+}
+
+.custom-width{
+  width: calc(100% + 2.6em)
 }
 
 body, html, #root {

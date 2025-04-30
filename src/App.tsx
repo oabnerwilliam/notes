@@ -1,7 +1,5 @@
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
-import React from 'react'
 
-import './App.css'
 import Navbar from './components/layout/navbar/Navbar'
 import Footer from './components/layout/footer/Footer'
 import Container from './components/layout/container/Container'
