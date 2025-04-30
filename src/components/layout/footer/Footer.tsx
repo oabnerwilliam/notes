@@ -1,22 +1,33 @@
-import style from './Footer.module.css'
-
 import { FaGithub, FaLinkedin } from 'react-icons/fa'
 
 const Footer = () => {
   return (
     <>
-      <div className={style.footer}>
-        <div className={style.icones}>
-          <a className={style.icone} href="https://github.com/oabnerwilliam" 
+      <div 
+      className='bg-bg text-secondary min-h-[200px]
+      flex flex-col justify-center items-center gap-4 w-full'
+      >
+        <div 
+        className='flex justify-center items-center gap-4 w-full'
+        >
+          <a 
+          className='text-secondary text-2xl'
+          href="https://github.com/oabnerwilliam" 
           target='_blank'>
-            <FaGithub/>
+            <FaGithub
+            className='transition-all duration-300 ease-in-out cursor-pointer hover:fill-primary'
+            />
           </a>  
-          <a className={style.icone} href="https://www.linkedin.com/in/abner-william/"
+          <a 
+          className='text-secondary text-2xl' 
+          href="https://www.linkedin.com/in/abner-william/"
           target='_blank'>
-            <FaLinkedin/>
+            <FaLinkedin
+            className='transition-all duration-300 ease-in-out cursor-pointer hover:fill-primary'
+            />
           </a>  
         </div>
-        <p><strong>Notes&copy;</strong> 2025</p>
+        <p className='text-xl'><strong className='text-primary'>Notes&copy;</strong> 2025</p>
       </div>
     </>
   )

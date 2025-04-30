@@ -1,7 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react'
 
-import style from './DropDown.module.css'
-
 import { useAuth } from '../../../contexts/AuthContext'
 import LinkButton from '../linkbutton/LinkButton'
 import clickOut from '../../../util/events/clickout/clickOut'
@@ -31,7 +29,7 @@ const DropDown = ({isOpen, setIsOpen}: DropDownProps) => {
         return cleanup
     }, [isOpen, user])
 
-    const handleOnClick = (account: User) => {
+    const handleOnClick = (account: User): ()=>void => {
         return () => {
             if (user && account.email!==user.email) {
                 login(account)
@@ -40,16 +38,34 @@ const DropDown = ({isOpen, setIsOpen}: DropDownProps) => {
         }
     }
     
+    const accountStyle: string = "bg-bg text-secondary border border-secondary rounded-2xl p-4 w-full flex flex-col items-center gap-1 transition-[background-color] duration-300 ease-in-out cursor-pointer hover:bg-bg-hover overflow-hidden"
+
+    const currentStyle: string = "bg-primary !text-p-text cursor-pointer hover:bg-p-hover"
+
     return (
-        <div className={`${style.dropdown} 
-        ${isOpen ? style.open : ''}`}
+        <div 
+        className={`absolute top-2/1 left-1/2
+        transform -translate-x-1/2
+        bg-bg
+        rounded-2xl
+        w-[350px] h-auto opacity-0
+        transition-all duration-300 ease-in-out
+        text-secondary p-8
+        shadow-sm shadow-black -z-1 invisible
+        ${isOpen ? "visible opacity-100 border border-secondary" : ""}`}
         ref={menuRef}>
             {
                 user && (
-                    <div className={style.content}>
-                        <h1>Minhas Contas</h1>
-                        <button className={`${style.account}
-                        ${style.current}`}
+                    <div 
+                    className='transtion-all ease-in-out duration-200
+                    gap-4 w-full
+                    flex flex-col items-center'
+                    >
+                        <h1
+                        className='bg-primary text-p-text
+                        p-2 text-3xl'>Minhas Contas</h1>
+                        <button className={`${accountStyle}
+                        ${currentStyle}`}
                         onClick={handleOnClick(user)}
                         key={user.id}>
                             <h2>{`${user.firstName} ${user.lastName}`}</h2>
@@ -57,8 +73,8 @@ const DropDown = ({isOpen, setIsOpen}: DropDownProps) => {
                         </button>
                         {
                             accounts.slice(0, 3).filter((acc)=>acc.email!==user.email).map((account)=>(
-                                <button className={`${style.account}
-                                ${account.email===user.email?style.current:''}`}
+                                <button className={`${accountStyle}
+                                ${account.email===user.email?currentStyle:''}`}
                                 onClick={handleOnClick(account)}
                                 key={account.id}>
                                     <h2>{`${account.firstName} ${account.lastName}`}</h2>

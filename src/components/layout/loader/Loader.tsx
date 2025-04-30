@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 
-import style from './Loader.module.css' 
 import { BarLoader } from 'react-spinners'
 
 type LoaderProps = {
@@ -17,8 +16,10 @@ const Loader = ({fullScreen = false}: LoaderProps) => {
   }, [])
 
   return (
-    <div className={`${style.loaderContainer}
-    ${fullScreen ? style.fullScreen : ''}`}>
+    <div className={`size-full
+    flex justify-center items-center
+    bg-bg
+    ${fullScreen ? "fixed top-0 left-0 w-screen h-screen bg-bg z-2" : ""}`}>
       <BarLoader color={color} width={50}/>
     </div>
   )

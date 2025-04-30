@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
-import style from './AuthButton.module.css'
 import { Link } from 'react-router-dom'
 import DropDown from '../dropdown/DropDown'
 
@@ -22,16 +21,29 @@ function AuthButton({handleOnClick, to, text, color, type, showAccounts}: Button
     setIsMenuOpen(!isMenuOpen)
   }
 
+  const btnStyle = `py-4 px-6
+    flex items-center justify-center
+    rounded-4xl
+    transition-all duration-300 ease-in-out
+    no-underline w-auto
+    border-none
+    text-[.8em]
+    ${color==="color"?
+      "bg-primary text-p-text cursor-pointer hover:bg-p-hover":
+      "bg-secondary text-bg cursor-pointer hover:bg-s-hover"}`
+
   return (
-    <div className={style.btnContainer}>
+    <div 
+    className='relative'
+    >
         {
             type==="button" ? (
-                <button className={`${style.btn} 
-                ${style[color]}`} 
+                <button 
+                className={btnStyle} 
                 onClick={clickEvent}>{text}</button>
             ) : to ? (
-                <Link className={`${style.btn} 
-                ${style[color]}`} 
+                <Link 
+                className={btnStyle} 
                 to={to}
                 onClick={clickEvent}>{text}</Link>
             ) : null

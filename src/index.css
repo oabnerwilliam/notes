@@ -30,10 +30,8 @@ h3 {
   --color-secondary: #000000;
   --color-s-hover: hsl(0, 0%, 20%);
   --color-bg: #efefef;
-  --bg-hover: hsl(0, 0%, 74%);
+  --color-bg-hover: hsl(0, 0%, 74%);
 }
-
- 
 
 .darkmode {
   --color-primary: hsl(160, 100%, 75%);
@@ -42,7 +40,7 @@ h3 {
   --color-secondary: #ffffff;
   --color-s-hover: hsl(0, 0%, 80%);
   --color-bg: hsl(0, 0%, 10%);
-  --bg-hover: hsl(0, 0%, 30%);
+  --color-bg-hover: hsl(0, 0%, 30%);
 }
 
 :root {
@@ -65,7 +63,7 @@ h3 {
   --bg-hover: hsl(0, 0%, 30%);
 }
 
-.custom-width{
+.custom-width {
   width: calc(100% + 2.6em)
 }
 
