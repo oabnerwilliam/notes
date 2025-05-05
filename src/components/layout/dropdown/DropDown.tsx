@@ -31,7 +31,11 @@ const DropDown = ({isOpen, setIsOpen}: DropDownProps) => {
 
     const handleOnClick = (account: User): ()=>void => {
         return () => {
-            if (user && account.email!==user.email) {
+            if (user) {
+                if (account.email!==user.email) {
+                    login(account)
+                }
+            } else {
                 login(account)
             }
             setIsOpen(false) 
@@ -54,16 +58,16 @@ const DropDown = ({isOpen, setIsOpen}: DropDownProps) => {
         shadow-sm shadow-black -z-1 invisible
         ${isOpen ? "visible opacity-100 border border-secondary" : ""}`}
         ref={menuRef}>
-            {
-                user && (
-                    <div 
-                    className='transtion-all ease-in-out duration-200
-                    gap-4 w-full
-                    flex flex-col items-center'
-                    >
-                        <h1
-                        className='bg-primary text-p-text
-                        p-2 text-3xl'>Minhas Contas</h1>
+            <div 
+            className='transtion-all ease-in-out duration-200
+            gap-4 w-full
+            flex flex-col items-center'
+            >
+                <h1
+                className='bg-primary text-p-text
+                p-2 text-3xl'>Minhas Contas</h1>
+                {
+                    user && (
                         <button className={`${accountStyle}
                         ${currentStyle}`}
                         onClick={handleOnClick(user)}
@@ -71,33 +75,42 @@ const DropDown = ({isOpen, setIsOpen}: DropDownProps) => {
                             <h2>{`${user.firstName} ${user.lastName}`}</h2>
                             <p>{user.email}</p>
                         </button>
-                        {
-                            accounts.slice(0, 3).filter((acc)=>acc.email!==user.email).map((account)=>(
-                                <button className={`${accountStyle}
-                                ${account.email===user.email?currentStyle:''}`}
-                                onClick={handleOnClick(account)}
-                                key={account.id}>
-                                    <h2>{`${account.firstName} ${account.lastName}`}</h2>
-                                    <p>{account.email}</p>
-                                </button>
-                            ))
-                        }
-                        {accounts.length>3 && (
-                            <LinkButton
-                            to="/accounts"
-                            text="Ver todas"
-                            color="color"
-                            handleOnClick={()=>setIsOpen(false)}/>
-                        )}
-                        <LinkButton
-                        to="/login"
-                        text="Adicionar Conta"
-                        color="page"
-                        handleOnClick={()=>setIsOpen(false)}/>
-                    </div>
-                )
-            }
-            
+                    )
+                }
+                {
+                    user ? (
+                        accounts.slice(0, 3).filter((acc)=>acc.email!==user.email).map((account)=>(
+                            <button className={accountStyle}
+                            onClick={handleOnClick(account)}
+                            key={account.id}>
+                                <h2>{`${account.firstName} ${account.lastName}`}</h2>
+                                <p>{account.email}</p>
+                            </button>
+                        ))
+                    ) : (
+                        accounts.slice(0, 3).map((account)=>(
+                            <button className={accountStyle}
+                            onClick={handleOnClick(account)}
+                            key={account.id}>
+                                <h2>{`${account.firstName} ${account.lastName}`}</h2>
+                                <p>{account.email}</p>
+                            </button>
+                        ))
+                    )
+                }
+                {accounts.length>3 && (
+                    <LinkButton
+                    to="/accounts"
+                    text="Ver todas"
+                    color="color"
+                    handleOnClick={()=>setIsOpen(false)}/>
+                )}
+                <LinkButton
+                to="/login"
+                text="Adicionar Conta"
+                color="page"
+                handleOnClick={()=>setIsOpen(false)}/>
+            </div>
         </div>
     )
 }

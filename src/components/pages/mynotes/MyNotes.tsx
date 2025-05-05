@@ -159,11 +159,11 @@ const MyNotes = () => {
                 </div>
               ) : (
                 <>
-                  <h3>Você ainda não está conectado.</h3>
+                  <h3 className='text-secondary'>Você ainda não está conectado.</h3>
                   <LinkButton color="green"
                   to="/login"
                   text="Entrar"/>
-                  <p>ou</p>
+                  <p className='text-secondary'>ou</p>
                   <LinkButton color="black"
                   to="/signup"
                   text="Criar Conta"/>  

@@ -79,11 +79,15 @@ const Navbar = () => {
                                     gap: '1em'
                                 }}
                                 >
-                                    <AuthButton
+                                    {/* <AuthButton
                                     text="Entrar"
                                     color="color"
                                     type="link"
-                                    to={loggedAccounts && loggedAccounts.length>0 ? "/accounts" : "/login"}/>
+                                    to={loggedAccounts && loggedAccounts.length>0 ? "/accounts" : "/login"}/> */}
+                                    <AuthButton text="Entrar"
+                                    type="button"
+                                    showAccounts="true"
+                                    color="color"/>
                                     <AuthButton
                                     text="Criar Conta"
                                     color="page"
