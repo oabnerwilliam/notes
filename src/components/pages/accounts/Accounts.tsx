@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { useAuth } from '../../../contexts/AuthContext'
-import style from  './Accounts.module.css'
 import { useNavigate } from 'react-router-dom'
 
 import LinkButton from '../../layout/linkbutton/LinkButton'
@@ -28,26 +27,36 @@ const Accounts = () => {
     }
 
     return (
-        <div className={style.accountsContainer}>
-            <h1>Minhas Contas</h1>
-            <div className={style.accountList}>
-                {
-                    accounts && (
-                        <div className={style.accountList}>
-                        {
-                        accounts.map((account)=>(
-                            <button className={style.account}
-                            onClick={handleOnClick(account)}
-                            key={account.id}>
-                                <h2>{`${account.firstName} ${account.lastName}`}</h2>
-                                <p>{account.email}</p>
-                            </button>
-                        ))    
-                        }
-                        </div>
-                    )
-                }    
-            </div>
+        <div 
+        className='flex flex-col items-center gap-8
+        w-auto mx-auto mt-20'
+        >
+            <h1
+            className='bg-primary text-p-text p-2'
+            >Minhas Contas</h1>
+            {
+                accounts && (
+                    <div 
+                    className='flex flex-col gap-4 w-full'
+                    >
+                    {
+                    accounts.map((account)=>(
+                        <button 
+                        className='flex flex-col items-center justify-center w-full gap-2
+                        bg-bg text-secondary
+                        border border-secondary p-8
+                        rounded-4xl 
+                        transition-[background-color] duration-300 ease-in-out cursor-pointer hover:bg-bg-hover'
+                        onClick={handleOnClick(account)}
+                        key={account.id}>
+                            <h2>{`${account.firstName} ${account.lastName}`}</h2>
+                            <p>{account.email}</p>
+                        </button>
+                    ))    
+                    }
+                    </div>
+                )
+            }
             <LinkButton
             to="/login"
             text="Adicionar Conta"

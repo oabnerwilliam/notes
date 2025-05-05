@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import style from './SignUpPage.module.css'
+//import style from './SignUpPage.module.css'
 
 import { useNavigate } from 'react-router-dom'
 
@@ -78,7 +78,12 @@ const SignUpPage = () => {
     }
 
     return (
-        <div className={style.formContainer}>
+        <div 
+        //className={style.formContainer}
+        className='w-full
+        flex flex-col justify-center items-center gap-6
+        text-secondary'
+        >
             {
                 message && (
                     <Message msg={message} type="error"/>

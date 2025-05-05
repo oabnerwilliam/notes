@@ -1,7 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-import style from './NoteForm.module.css'
-
 import { useAuth } from '../../../contexts/AuthContext'
 import clickOut from '../../../util/events/clickout/clickOut'
 
@@ -10,7 +8,7 @@ type NoteFormProps = {
 }
 
 const NoteForm = ({handleSubmit}: NoteFormProps) => {
-  const [note, setNote] = useState<Note>({id: "", title: "", content: "", userId: ""})
+  const [note, setNote] = useState<Note>({title: "", content: "", userId: ""})
   const [isFocused, setIsFocused] = useState<boolean>(false)
 
   const formRef = useRef<HTMLFormElement>(null)
@@ -66,18 +64,25 @@ const NoteForm = ({handleSubmit}: NoteFormProps) => {
     if(note.title && note.content) {
       handleSubmit(note)
       if (user) {
-        setNote({id: "", title: "", content: "", userId: ""})   
+        setNote({title: "", content: "", userId: ""})   
       }
     }
   }
   
   return (
-    <form className={style.form} onSubmit={(e)=>{e.preventDefault()}} ref={formRef}>
+    <form
+    className='flex flex-col
+    min-h-[200px] h-auto max-h-[500px] w-[600px]
+    border border-secondary
+    transition-all duration-300 ease-in-out'
+    onSubmit={(e)=>{e.preventDefault()}} ref={formRef}>
         <input 
         type="text" 
         name="title" 
-        id="" 
-        className={style.title} 
+        id="title"
+        className='outline-none p-3 resize-none
+        bg-bg text-secondary
+        w-full h-3/10 text-[1.8em] border-none' 
         placeholder="Minha Nota" 
         onChange={handleOnChange}
         value={note.title || ''}
@@ -86,8 +91,10 @@ const NoteForm = ({handleSubmit}: NoteFormProps) => {
         required/>
         <textarea 
         name="content" 
-        id="" 
-        className={style.content} 
+        id="content"
+        className='outline-none p-3 resize-none
+        bg-bg text-secondary
+        w-full h-7/10 text-[1.2em] border-none' 
         ref={textRef}
         placeholder="Escreva sua nota..." 
         onChange={handleOnChange}

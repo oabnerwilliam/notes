@@ -4,4 +4,7 @@ export const safelist = ['w-10'];
 export const theme = {
     extend: {},
 };
-export const plugins = []  
+export const plugins = [
+    require('@tailwindcss/line-clamp'),
+    require('tailwind-scrollbar'),
+]  

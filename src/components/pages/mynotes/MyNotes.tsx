@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react'
-
-import style from './MyNotes.module.css'
+import { useEffect, useState } from 'react'
 
 import NoteForm from '../../notes/form/NoteForm'
 import NoteCard from '../../notes/card/NoteCard'
@@ -63,6 +61,10 @@ const MyNotes = () => {
     }
   }, [filteredNotes, user])
 
+  useEffect(()=>{
+    console.log(searchFiltered)
+  }, [searchFiltered])
+
   const createNote = async (note: Note): Promise<void> => {
     if (user) {
       note = {
@@ -105,7 +107,10 @@ const MyNotes = () => {
   }
 
   return(
-    <div className={style.notes}>
+    <div 
+    className='flex flex-col items-center gap-8
+    m-12 w-full'
+    >
       {
         isLoading ? (
           <Loader/>
@@ -117,8 +122,12 @@ const MyNotes = () => {
                 type="error"/>    
               )
             }
-            <div className={style.header}>
-              <h1>Minhas Anotações</h1>
+            <div 
+            className='flex justify-between w-[600px]'
+            >
+              <h1
+              className='bg-primary text-p-text p-[.3em]'
+              >Minhas Anotações</h1>
               {
                 searchFiltered && searchFiltered.length>0 && (
                   <SearchInput
@@ -128,12 +137,16 @@ const MyNotes = () => {
                 )
               }
             </div>
-            <div className={style.noteForm}>
+            <div 
+            >
               <NoteForm handleSubmit={createNote}/>
             </div>
             {
               user ? (
-                <div className={style.noteList}>
+                <div 
+                className='w-full
+                grid grid-cols-3 gap-6'
+                >
                   {
                     searchFiltered.map((note)=>(
                       <NoteCard note={note}

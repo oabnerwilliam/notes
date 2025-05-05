@@ -1,10 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 
-import style from './NoteCard.module.css'
-import { FaTrash, FaPencilAlt } from 'react-icons/fa'
-import { FaX } from 'react-icons/fa6'
+import { FaTrash } from 'react-icons/fa'
 import NoteModal from '../modal/NoteModal'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, clamp, motion } from 'framer-motion'
 
 type NoteCardProps = {
     note: Note,
@@ -31,27 +29,43 @@ const NoteCard = ({note, handleDelete, handleSubmit}: NoteCardProps) => {
     return (
         <>
             <div 
-            className={`${style.noteCard} 
-            ${editing && style.hide}`} 
+            className={`group flex flex-col justify-between
+            border border-secondary p-2 pb-4 min-h-[200px]
+            h-auto overflow-hidden transition-all duration-300 ease-in-out text-secondary min-w-[250px] hover:bg-bg-hover cursor-pointer w-full
+            ${editing ? "opacity-0" : ""}`}
             onClick={(e)=>{
                 if (!trashRef.current?.contains(e.target as Node)) {
                     toggleEditing()    
                 }
             }}>
-                <div className={style.info}>
-                    <h2>{currentNote.title}</h2>
+                <div 
+                className='flex flex-col justify-between'
+                >
+                    <h2
+                    className='p-2'
+                    >{currentNote.title}</h2>
                     {/* <p>{currentNote.content.split("\n").map((line, index)=>(
                         <React.Fragment key={index}>
                             {line}
                             <br/>
                         </React.Fragment>
                     ))}</p>     */}
-                    <p>{currentNote.content.replace(/\n/g, ' ')}</p>
+                    <p
+                    className='text-xl line-clamp-9 whitespace-normal
+                    p-2'
+                    style={{ lineClamp: 9, textOverflow: "ellipsis" }}
+                    >{currentNote.content.replace(/\n/g, ' ')}</p>
                 </div>
-                <div className={style.actions}>
+                <div 
+                className='w-full flex justify-center p-2
+                opacity-0 transition-all ease-in-out duration-300 group-hover:opacity-100'
+                >
                     <button 
                     onClick={handleDelete}
                     ref={trashRef}
+                    className='bg-inherit border-none text-lg
+                    transition-all duration-300 ease-in-out
+                    text-secondary cursor-pointer hover:text-primary'
                     >
                         <FaTrash/>   
                     </button>

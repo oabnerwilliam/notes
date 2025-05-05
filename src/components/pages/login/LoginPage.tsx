@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import UserForm from '../../form/auth/UserForm'
-import style from './LoginPage.module.css'
 import { useNavigate } from 'react-router-dom'
 import LinkButton from '../../layout/linkbutton/LinkButton'
 
@@ -60,7 +59,11 @@ const LoginPage = () => {
     }
 
     return (
-        <div className={style.loginContainer}>
+        <div 
+        className='w-full 
+        flex flex-col items-center justify-center gap-6
+        text-secondary'
+        >
             {
                 message && (
                     <Message type={"error"} msg={message}/>

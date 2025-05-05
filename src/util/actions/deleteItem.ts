@@ -2,7 +2,7 @@ import { remove } from "../requests/api"
 
 
 const deleteItem = async <T extends {
-    id: string
+    id?: string
 }>(url: string, deletedItem: T, list: T[]): Promise<{ newList: T[] }> => {
     const data = await remove(url)
     

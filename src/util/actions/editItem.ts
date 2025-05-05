@@ -1,7 +1,7 @@
 import { put } from '../requests/api'
 
 const editItem = async <T extends {
-    id: string
+    id?: string
 }>(url: string, item: T, list: T[]): Promise<{ newList: T[] }> => {
     const data = await put(url, item)
 

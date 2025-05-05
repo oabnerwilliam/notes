@@ -1,5 +1,3 @@
-import style from './Home.module.css'
-
 import notes from '../../../img/notes.svg'
 import LinkButton from '../../layout/linkbutton/LinkButton'
 
@@ -10,26 +8,42 @@ const Home = () => {
 
   return (
     <>
-      <div className={style.home}>
+      <div 
+      className='m-16
+      flex flex-col items-center justify-between gap-6
+      size-full'
+      >
         {
           user ? (
             <>
-              <h1>Olá, <span>{user.firstName}</span></h1>
-              <p>Bem-vindo de volta ao seu bloco de notas virtual!</p>
+              <h1
+              className='text-[3.5em] mb-0
+              text-secondary'
+              >Olá, <span className='bg-primary text-p-text p-[.2em]'>{user.firstName}</span></h1>
+              <p
+              className='text-s-hover text-[1.3em]'
+              >Bem-vindo de volta ao seu bloco de notas virtual!</p>
               <LinkButton to="/mynotes" text="Minhas Notas" color="color"/>
             </>
           ) : (
             <>
-              <h1><span>NOTES</span></h1>
-              <p>O seu bloco de notas virtual.</p>
-              <div className={style.links}>
+              <h1
+              className='text-[3.5em] mb-0
+              text-secondary'
+              ><span className='bg-primary text-p-text p-[.2em]'>NOTES</span></h1>
+              <p
+              className='text-s-hover text-[1.3em]'
+              >O seu bloco de notas virtual.</p>
+              <div 
+              className='flex gap-4'
+              >
                 <LinkButton to={loggedAccounts && loggedAccounts.length > 0 ? "/accounts" : "/login"} text="Entrar" color="color"/>
                 <LinkButton to="/signup" text="Criar Conta" color="page"/>
               </div>
             </>
           )
         }
-        <img src={notes} alt="Notas"/>
+        <img src={notes} alt="Notas" className='mt-8 w-[300px]'/>
       </div>
     </>
   )
