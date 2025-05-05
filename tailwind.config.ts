@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
-export const content = ["./src/**/*.{js,jsx,ts,tsx}"];
-export const safelist = ['w-10'];
+export const content: string[] = ["./src/**/*.{js,jsx,ts,tsx}"];
+export const safelist: string[] = ['w-10'];
 export const theme = {
     extend: {},
 };
