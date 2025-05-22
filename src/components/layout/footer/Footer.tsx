@@ -27,7 +27,7 @@ const Footer = () => {
             />
           </a>  
         </div>
-        <p className='text-xl'><strong className='text-primary'>Notes&copy;</strong> 2025</p>
+        <p className='text-xl'><strong className='text-primary'>MyNotes&copy;</strong> 2025</p>
       </div>
     </>
   )

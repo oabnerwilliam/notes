@@ -30,7 +30,7 @@ const Home = () => {
               <h1
               className='text-[3.5em] mb-0
               text-secondary'
-              ><span className='bg-primary text-p-text p-[.2em]'>NOTES</span></h1>
+              ><span className='bg-primary text-p-text p-[.2em]'>MyNotes</span></h1>
               <p
               className='text-s-hover text-[1.3em]'
               >O seu bloco de notas virtual.</p>

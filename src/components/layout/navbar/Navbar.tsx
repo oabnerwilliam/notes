@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
 import AuthButton from '../authbutton/AuthButton'
+import logo from '../../../../public/favicon.svg'
 
 import {useAuth} from '../../../contexts/AuthContext'
 
@@ -42,14 +43,19 @@ const Navbar = () => {
             ${scrolled ? "shadow-sm shadow-black after:opacity-0" : ""}`}
             >
                 <div 
-                className='max-w-300 h-full mx-auto
+                className='max-w-250 h-full mx-auto
                 flex justify-between items-center'
                 >
+                    {/* <Link to="/" 
+                    className='self-center justify-self-start text-secondary decoration-none
+                    transition-all duration-300 ease-in-out
+                    relative hover:text-primary'
+                    ><h1>NOTES</h1></Link> */}
                     <Link to="/" 
                     className='self-center justify-self-start text-secondary decoration-none
                     transition-all duration-300 ease-in-out
                     relative hover:text-primary'
-                    ><h1>NOTES</h1></Link>
+                    ><img src={logo} className='w-[50px]'></img></Link>
                     <ul>
                         {
                             user ? (
