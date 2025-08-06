@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useAuth } from '../../../contexts/AuthContext'
+import { useAuth } from '../../../contexts/authContext/AuthContext'
 import { useNavigate } from 'react-router-dom'
 
 import LinkButton from '../../layout/linkbutton/LinkButton'

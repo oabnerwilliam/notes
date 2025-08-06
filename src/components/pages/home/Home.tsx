@@ -1,7 +1,7 @@
 import notes from '../../../img/notes.svg'
 import LinkButton from '../../layout/linkbutton/LinkButton'
 
-import { useAuth } from '../../../contexts/AuthContext'
+import { useAuth } from '../../../contexts/authContext/AuthContext'
 
 const Home = () => {
   const {user, loggedAccounts} = useAuth()

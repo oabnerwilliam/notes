@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import AuthButton from '../authbutton/AuthButton'
 import logo from '../../../../public/favicon.svg'
 
-import {useAuth} from '../../../contexts/AuthContext'
+import {useAuth} from '../../../contexts/authContext/AuthContext'
 
 const Navbar = () => {
     const {user, loggedAccounts, logout} = useAuth() // tipar

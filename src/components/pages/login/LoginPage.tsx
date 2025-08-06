@@ -3,7 +3,7 @@ import UserForm from '../../form/auth/UserForm'
 import { useNavigate } from 'react-router-dom'
 import LinkButton from '../../layout/linkbutton/LinkButton'
 
-import { useAuth } from '../../../contexts/AuthContext'
+import { useAuth } from '../../../contexts/authContext/AuthContext'
 import Message from '../../layout/message/Message'
 
 import {get} from '../../../util/requests/api'

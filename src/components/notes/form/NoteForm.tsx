@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-import { useAuth } from '../../../contexts/AuthContext'
+import { useAuth } from '../../../contexts/authContext/AuthContext'
 import clickOut from '../../../util/events/clickout/clickOut'
 
 type NoteFormProps = {

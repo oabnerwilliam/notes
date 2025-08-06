@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react'
 
-import { useAuth } from '../../../contexts/AuthContext'
+import { useAuth } from '../../../contexts/authContext/AuthContext'
 import LinkButton from '../linkbutton/LinkButton'
 import clickOut from '../../../util/events/clickout/clickOut'
 

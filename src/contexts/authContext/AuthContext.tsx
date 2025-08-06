@@ -6,7 +6,7 @@ import {
     GoogleAuthProvider,
     FacebookAuthProvider,
 } from 'firebase/auth';
-import { auth } from '../../firebase'
+import { auth } from '../../../firebase'
 import {ReactNode, createContext, useContext, useState, useEffect} from 'react'
 
 type AuthContextType = {
@@ -104,7 +104,7 @@ function useAuth(): AuthContextType {
     const context = useContext(AuthContext);
 
     if (!context) {
-        throw new Error('useAuth must be used within an AuthProvider');
+        throw new Error('useAuth deve ser usado dentro de um AuthProvider');
     }
 
     return context;
