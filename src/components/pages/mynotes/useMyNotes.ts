@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useAuth } from '../../../contexts/authContext/AuthContext'
-import { get } from '../../../util/requests/api'
+import { get, post, put, remove } from '../../../util/requests/api'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { userFilter } from '../../../util/filters/userfilter/userFilter'
-import createItem from '../../../util/actions/createItem'
-import editItem from '../../../util/actions/editItem'
-import deleteItem from '../../../util/actions/deleteItem'
 import { useSearch } from '../../../hooks/search/useSearch'
 
 const useMyNotes = () => {
@@ -14,6 +11,7 @@ const useMyNotes = () => {
     const { user } = useAuth()
 
     const queryClient = useQueryClient()
+
 
     const { data, isLoading: loadingNotes } = useQuery<Note[]>({
         queryKey: ['notes'],
@@ -28,39 +26,43 @@ const useMyNotes = () => {
         }
     }, [data, user])
 
+
+    const createNoteMutation = useMutation({
+        mutationFn: async ({ note }: { note: Note }) => await post('http://localhost:5000/notes/', note),
+        onSuccess: () => queryClient.invalidateQueries({ queryKey: ['notes'] })
+    })
+
+    const editNoteMutation = useMutation({
+        mutationFn: async ({ note }: { note: Note }) => await put(`http://localhost:5000/notes/${note.id}`, note),
+        onSuccess: () => queryClient.invalidateQueries({ queryKey: ['notes'] })
+    })
+
+    const deleteNoteMutation = useMutation({
+        mutationFn: async ({ note }: { note: Note }) => await remove(`http://localhost:5000/notes/${note.id}`),
+        onSuccess: () => queryClient.invalidateQueries({ queryKey: ['notes'] })
+    })
+
+
     const createNote = async (note: Note): Promise<void> => {
         note = {
             ...note,
             ["userId"]: user.id
         }
         
-        useMutation({
-            mutationFn: (note: Note) => createItem("http://localhost:5000/notes", note, notes),
-            onSuccess: () => {
-                queryClient.invalidateQueries({ queryKey: ['notes'] })
-            }
-        }).mutate(note)
+        createNoteMutation.mutate({ note })
     }
 
     const editNote = async (note: Note): Promise<void> => {
-        useMutation({
-            mutationFn: (note: Note) => editItem(`http://localhost:5000/notes/${note.id}`, note, notes),
-            onSuccess: () => {
-                queryClient.invalidateQueries({ queryKey: ['notes'] })
-            }
-        }).mutate(note)
+        editNoteMutation.mutate({ note })
     }
 
     const deleteNote = async (note: Note): Promise<void> => {
-        useMutation({
-            mutationFn: (note: Note) => deleteItem(`http://localhost:5000/notes/${note.id}`, note, notes),
-            onSuccess: () => {
-                queryClient.invalidateQueries({ queryKey: ['notes'] })
-            }
-        }).mutate(note)
+        deleteNoteMutation.mutate({ note })
     }
 
+
     const { searchItem } = useSearch(notes, setFilteredNotes)
+    
 
     return {
         filteredNotes,

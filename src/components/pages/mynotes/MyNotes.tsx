@@ -40,10 +40,12 @@ const MyNotes = () => {
                 placeholder="Pesquisar nota"
               />
             </div>
+
             <div 
             >
               <NoteForm handleSubmit={createNote}/>
             </div>
+            
             {
               !loadingNotes ? (
                 <div 
@@ -52,10 +54,11 @@ const MyNotes = () => {
                 >
                   {
                     filteredNotes.map((note)=>(
-                      <NoteCard note={note}
-                      key={note.id}
-                      handleDelete={()=>deleteNote(note)}
-                      handleSubmit={editNote}
+                      <NoteCard 
+                        note={note}
+                        key={note.id}
+                        handleDelete={()=>deleteNote(note)}
+                        handleSubmit={editNote}
                       />
                     ))  
                   }
