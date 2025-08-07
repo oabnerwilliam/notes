@@ -1,4 +1,4 @@
-const userFilter = <T extends {
+export const userFilter = <T extends {
     userId: string
 }>(list?: T[], user?: User): T[] => {
     if (user && list) {
@@ -9,5 +9,3 @@ const userFilter = <T extends {
     }
     return []
 }
-
-export default userFilter
