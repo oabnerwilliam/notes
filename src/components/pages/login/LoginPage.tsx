@@ -19,7 +19,7 @@ const LoginPage = () => {
     })
     const [message, setMessage] = useState<string>("")
 
-    const {login, loginWithGoogle, loginWithFacebook} = useAuth()
+    const { login } = useAuth()
 
     const navigate = useNavigate()
 
@@ -40,7 +40,6 @@ const LoginPage = () => {
 
     const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        //const message = loginUser(existingUsers, currentUser, "/mynotes", login)
         const foundUser: User | undefined = existingUsers.find((existingUser)=>existingUser.email===currentUser.email)
         if (foundUser) {
             if (foundUser.password===currentUser.password) {
@@ -52,7 +51,6 @@ const LoginPage = () => {
         } else {
             setMessage("Usuário não existe.")
         }
-        //setMessage(message)
         setTimeout(()=>{
             setMessage("")
         }, 3000)
@@ -71,16 +69,6 @@ const LoginPage = () => {
             }
             <h1>Entrar</h1>
             <UserForm type="login" btnText="Entrar" handleOnChange={handleOnChange} handleSubmit={handleLogin}/>
-            <button onClick={()=>{
-                navigate("/mynotes")
-                loginWithGoogle()
-            }} className='cursor-pointer p-2 hover:bg-primary hover:text-p-text 
-            transition-all duration-300 ease-in-out'>Login com Google</button>
-            <button onClick={()=>{
-                navigate("/mynotes")
-                loginWithFacebook()
-            }} className='cursor-pointer p-2 hover:bg-primary hover:text-p-text 
-            transition-all duration-300 ease-in-out'>Login com Facebook</button>
             <LinkButton to="/signup" text="Fazer Cadastro" color="color"/>
         </div>  
     )
