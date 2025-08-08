@@ -10,24 +10,21 @@ import SignUpPage from './components/pages/signup/SignUpPage'
 import LoginPage from './components/pages/login/LoginPage'
 import DarkButton from './components/layout/darkmode/DarkButton'
 import Accounts from './components/pages/accounts/Accounts'
-import LoadingProvider from './contexts/loadingContext/LoadingContext'
 
 function App() {
   return (
     <div>
       <Router>
         <Navbar/>
-        <LoadingProvider>
-          <Container customClass="router">
-            <Routes>
-              <Route path="/" element={<Home/>}/>
-              <Route path="/mynotes" element={<MyNotes/>}/>
-              <Route path="/signup" element={<SignUpPage/>}/>
-              <Route path="/login" element={<LoginPage/>}/>
-              <Route path="/accounts" element={<Accounts/>}/>
-            </Routes>
-          </Container>
-        </LoadingProvider>
+        <Container customClass="router">
+          <Routes>
+            <Route path="/" element={<Home/>}/>
+            <Route path="/mynotes" element={<MyNotes/>}/>
+            <Route path="/signup" element={<SignUpPage/>}/>
+            <Route path="/login" element={<LoginPage/>}/>
+            <Route path="/accounts" element={<Accounts/>}/>
+          </Routes>
+        </Container>
         <Footer/>
         <DarkButton/>
       </Router>

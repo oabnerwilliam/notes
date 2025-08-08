@@ -15,9 +15,7 @@ const useMyNotes = () => {
 
     const { data, isLoading: loadingNotes } = useQuery<Note[]>({
         queryKey: ['notes'],
-        queryFn: async () => {
-            return await get("http://localhost:5000/notes")
-        }
+        queryFn: async () => await get("http://localhost:5000/notes")
     })
 
     useEffect(()=>{

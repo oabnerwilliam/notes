@@ -8,7 +8,7 @@ import logo from '../../../../public/favicon.svg'
 import {useAuth} from '../../../contexts/authContext/AuthContext'
 
 const Navbar = () => {
-    const {user, loggedAccounts, logout} = useAuth() // tipar
+    const {user, logout} = useAuth() // tipar
     const [scrolled, setScrolled] = useState<boolean>(false)
 
     const navigate = useNavigate()
@@ -46,11 +46,6 @@ const Navbar = () => {
                 className='max-w-250 h-full mx-auto
                 flex justify-between items-center'
                 >
-                    {/* <Link to="/" 
-                    className='self-center justify-self-start text-secondary decoration-none
-                    transition-all duration-300 ease-in-out
-                    relative hover:text-primary'
-                    ><h1>NOTES</h1></Link> */}
                     <Link to="/" 
                     className='self-center justify-self-start text-secondary decoration-none
                     transition-all duration-300 ease-in-out
@@ -85,11 +80,6 @@ const Navbar = () => {
                                     gap: '1em'
                                 }}
                                 >
-                                    {/* <AuthButton
-                                    text="Entrar"
-                                    color="color"
-                                    type="link"
-                                    to={loggedAccounts && loggedAccounts.length>0 ? "/accounts" : "/login"}/> */}
                                     <AuthButton text="Entrar"
                                     type="button"
                                     showAccounts="true"
