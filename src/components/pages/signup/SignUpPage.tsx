@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom'
 import UserForm from '../../form/auth/UserForm'
 import LinkButton from '../../layout/linkbutton/LinkButton'
 import Message from '../../layout/message/Message'
+import { useMutation } from '@tanstack/react-query'
+import { post } from '../../../util/requests/api'
 
 const SignUpPage = () => {
     const [user, setUser] = useState<User>({
@@ -27,6 +29,11 @@ const SignUpPage = () => {
             [e.target.name]: e.target.value
         })
     }
+
+    const addUserMutation = useMutation({
+        mutationFn: async ({ user }: { user: User }) => await post("http://localhost:5000/users", user),
+        onSuccess: () => navigate("/login")
+    })
 
     useEffect(()=>{
         fetch("http://localhost:5000/users", {
@@ -53,33 +60,13 @@ const SignUpPage = () => {
             setTimeout(()=>{
                 setMessage("")
             }, 3000)
-        } else {
-            fetch("http://localhost:5000/users", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(user)
-            })
-            .then(resp=>resp.json())
-            .then((data)=>{
-                console.log("Usuário cadastrado com sucesso!", data)
-                return fetch("http://localhost:5000/users")
-            })
-            .then(resp=>resp.json())
-            .then((updatedUsers)=>{
-                setExistingUsers(updatedUsers)
-            })
-            .catch((err)=>{
-                console.log("Erro ao cadastrar usuário ou atualizar lista.", err)
-            })
-            navigate("/login")
-        }
+            return
+        } 
+        addUserMutation.mutate({ user })
     }
 
     return (
         <div 
-        //className={style.formContainer}
         className='w-full
         flex flex-col justify-center items-center gap-6
         text-secondary'

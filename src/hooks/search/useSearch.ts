@@ -9,10 +9,10 @@ type useSearchType = {
     searchItem: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-function useSearch<T extends SearchableItem>(
+export const useSearch = <T extends SearchableItem> (
     list: T[], 
-    setFiltered: (filteredList: T[])=>void
-): useSearchType  {
+    setFiltered: (filteredList: T[]) => void
+): useSearchType => {
     const [searchText, setSearchText] = useState<string>('')
     
     useEffect(()=>{
@@ -30,7 +30,5 @@ function useSearch<T extends SearchableItem>(
         setSearchText(e.target.value)
     }
   
-    return {searchItem}
-}   
-
-export {useSearch}
+    return { searchItem }
+}

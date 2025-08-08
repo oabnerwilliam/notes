@@ -1,4 +1,6 @@
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { ReactNode, createContext, useContext, useState, useEffect } from 'react'
+import { get, put, remove } from '../../util/requests/api'
 
 type AuthContextType = {
     user: User | null,
@@ -17,16 +19,26 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     const [user, setUser] = useState<User | null>(null)
     const [loggedAccounts, setLoggedAccounts] = useState<User[]>([])
     
+    const { data } = useQuery({
+        queryKey: ['user'],
+        queryFn: async () => await get("http://localhost:5000/loggedUser")
+    })
+
+    const loginMutation = useMutation({
+        mutationFn: ({ user }: { user: User }) => put(`http://localhost:5000/loggedUser`, user)
+    })
+
+    const logoutMutation = useMutation({
+        mutationFn: () => put(`http://localhost:5000/loggedUser`, {})
+    })
+
     useEffect(()=>{
-        const storedUser: string | null = localStorage.getItem("loggedUser")
-        if (storedUser) {
-            setUser(JSON.parse(storedUser))
-        }
-    }, [])
+        if (data?.id) setUser(data)
+    }, [data])
 
     function login(userData: User) {
         setUser(userData)
-        localStorage.setItem("loggedUser", JSON.stringify(userData))
+        loginMutation.mutate({ user: userData })
         
         const localAccounts: string | null = localStorage.getItem('loggedAccounts')
 
@@ -41,13 +53,9 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         }
     }
 
-    async function logout() {
-        try {
-            setUser(null)
-            localStorage.removeItem("loggedUser")
-        } catch (error) {
-            console.log("Erro ao deslogar:", error)
-        }    
+    const logout = () => {
+        setUser(null)
+        logoutMutation.mutate()
     }
 
     return (
