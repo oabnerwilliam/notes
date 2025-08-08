@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { ReactNode, createContext, useContext, useState, useEffect } from 'react'
-import { get, put, remove } from '../../util/requests/api'
+import { ReactNode, createContext, useContext, useState } from 'react'
+import { get, put } from '../../util/requests/api'
+import Loader from '../../components/layout/loader/Loader'
 
 type AuthContextType = {
     user: User | null,
@@ -15,13 +16,15 @@ type AuthProviderProps = {
 
 const AuthContext = createContext<AuthContextType | null>(null)
 
-const AuthProvider = ({ children }: AuthProviderProps) => {
+export const AuthProvider = ({ children }: AuthProviderProps) => {
     const [user, setUser] = useState<User | null>(null)
     const [loggedAccounts, setLoggedAccounts] = useState<User[]>([])
     
-    const { data } = useQuery({
+    const { isLoading } = useQuery({
         queryKey: ['user'],
-        queryFn: async () => await get("http://localhost:5000/loggedUser")
+        queryFn: async () => {
+            setUser(await get("http://localhost:5000/loggedUser"))
+        } 
     })
 
     const loginMutation = useMutation({
@@ -32,11 +35,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         mutationFn: () => put(`http://localhost:5000/loggedUser`, {})
     })
 
-    useEffect(()=>{
-        if (data?.id) setUser(data)
-    }, [data])
-
-    function login(userData: User) {
+    const login = (userData: User) => {
         setUser(userData)
         loginMutation.mutate({ user: userData })
         
@@ -61,20 +60,9 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     return (
         <AuthContext.Provider
         value={{user, loggedAccounts, login, logout}}>
-            {children}
+            { !isLoading ? children : <Loader/> }
         </AuthContext.Provider>
     )
 }
 
-function useAuth(): AuthContextType {
-    const context = useContext(AuthContext);
-
-    if (!context) {
-        throw new Error('useAuth deve ser usado dentro de um AuthProvider');
-    }
-
-    return context;
-}
-
-export { useAuth }
-export default AuthProvider
+export const useAuth = (): AuthContextType | null => useContext(AuthContext)

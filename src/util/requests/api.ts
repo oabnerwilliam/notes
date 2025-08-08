@@ -14,7 +14,6 @@ export const get = async (url: string) => {
         const data = await resp.json()
 
         return data    
-
     } catch(error) {
         console.log("Erro:", (error as Error).message)
     }
