@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { ReactNode, createContext, useContext, useState } from 'react'
+import { ReactNode, createContext, useContext, useEffect, useState } from 'react'
 import { get, put } from '../../util/requests/api'
 import Loader from '../../components/layout/loader/Loader'
 
@@ -20,12 +20,16 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     const [user, setUser] = useState<User | null>(null)
     const [loggedAccounts, setLoggedAccounts] = useState<User[]>([])
     
-    const { isLoading } = useQuery({
+    const { data, isLoading } = useQuery({
         queryKey: ['user'],
-        queryFn: async () => {
-            setUser(await get("http://localhost:5000/loggedUser"))
-        } 
+        queryFn: async () => await get("http://localhost:5000/loggedUser")
     })
+
+    useEffect(()=>{
+        if (data?.id) {
+            setUser(data)
+        }
+    }, [data])
 
     const loginMutation = useMutation({
         mutationFn: ({ user }: { user: User }) => put(`http://localhost:5000/loggedUser`, user)
