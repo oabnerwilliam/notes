@@ -8,16 +8,16 @@ import { useAuth } from '../../../contexts/authContext/AuthContext'
 
 import useMyNotes from './useMyNotes'
 import Loader from '../../layout/loader/Loader'
+import { Suspense } from 'react'
+import { NoteList } from '../../notes/list/NoteList'
 
 const MyNotes = () => {
   const { user } = useAuth()
 
   const {
     filteredNotes,
-    loadingNotes,
+    setNotes,
     createNote,
-    editNote,
-    deleteNote,
     searchItem
   } = useMyNotes()
 
@@ -46,27 +46,12 @@ const MyNotes = () => {
               <NoteForm handleSubmit={createNote}/>
             </div>
             
-            {
-              !loadingNotes ? (
-                <div 
-                className='w-full
-                grid grid-cols-3 gap-6'
-                >
-                  {
-                    filteredNotes.map((note)=>(
-                      <NoteCard 
-                        note={note}
-                        key={note.id}
-                        handleDelete={()=>deleteNote(note)}
-                        handleSubmit={editNote}
-                      />
-                    ))  
-                  }
-                </div>
-              ) : (
-                <Loader/>
-              )
-            }
+            <Suspense fallback={<Loader/>}>
+              <NoteList
+                filteredNotes={filteredNotes}
+                setNotes={setNotes}
+              />
+            </Suspense>
           </>
         ) : (
           <>
