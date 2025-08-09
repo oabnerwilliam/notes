@@ -7,7 +7,7 @@ import { useAuth } from '../../../contexts/authContext/AuthContext'
 export const useMyNotes = () => {
     const [notes, setNotes] = useState<Note[]>([])
     
-    const { searchItem, filtered } = useSearch(notes)
+    const { searchItem, filtered: filteredNotes } = useSearch(notes)
 
     const { user } = useAuth()
 
@@ -46,7 +46,7 @@ export const useMyNotes = () => {
     }    
 
     return {
-        filteredNotes: filtered,
+        filteredNotes,
         setNotes,
         createNote,
         editNote,
