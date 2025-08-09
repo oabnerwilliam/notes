@@ -6,7 +6,7 @@ import clickOut from '../../../util/events/clickout/clickOut'
 
 type NoteModalProps = {
   handleSubmit: (note: Note)=>void,
-  handleDelete: ()=>void,
+  handleDelete: (note: Note)=>void,
   note: Note,
   toggleEditing: ()=>void
 }
@@ -31,7 +31,6 @@ const NoteModal = ({handleSubmit, handleDelete, note, toggleEditing}: NoteModalP
           toggleEditing()
           if(isFocused) {
             handleSubmit(currentNote)
-            console.log(currentNote)
           }
         })
 
@@ -119,7 +118,7 @@ const NoteModal = ({handleSubmit, handleDelete, note, toggleEditing}: NoteModalP
                 flex justify-center p-2'
                 >
                     <button 
-                    onClick={handleDelete}
+                    onClick={() => handleDelete(note)}
                     className='bg-inherit border-none
                     text-[1.1em] 
                     transition-all duration-300 ease-in-out

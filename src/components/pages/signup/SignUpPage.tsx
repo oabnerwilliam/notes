@@ -44,11 +44,7 @@ const SignUpPage = () => {
         })
         .then(resp=>resp.json())
         .then((data)=>{
-            console.log(data)
             setExistingUsers(data)
-        })
-        .catch((err)=>{
-            console.log("Erro ao ver usuários já cadastrados.", err)
         })
     }, [])
 
