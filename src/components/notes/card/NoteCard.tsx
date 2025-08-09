@@ -6,7 +6,7 @@ import { AnimatePresence, clamp, motion } from 'framer-motion'
 
 type NoteCardProps = {
     note: Note,
-    handleDelete: () => void,
+    handleDelete: (note: Note) => void,
     handleSubmit: (note: Note) => void
 }
 
@@ -44,12 +44,6 @@ const NoteCard = ({note, handleDelete, handleSubmit}: NoteCardProps) => {
                     <h2
                     className='p-2'
                     >{currentNote.title}</h2>
-                    {/* <p>{currentNote.content.split("\n").map((line, index)=>(
-                        <React.Fragment key={index}>
-                            {line}
-                            <br/>
-                        </React.Fragment>
-                    ))}</p>     */}
                     <p
                     className='text-xl line-clamp-9 whitespace-normal
                     p-2'
@@ -61,7 +55,7 @@ const NoteCard = ({note, handleDelete, handleSubmit}: NoteCardProps) => {
                 opacity-0 transition-all ease-in-out duration-300 group-hover:opacity-100'
                 >
                     <button 
-                    onClick={handleDelete}
+                    onClick={()=>handleDelete(note)}
                     ref={trashRef}
                     className='bg-inherit border-none text-lg
                     transition-all duration-300 ease-in-out

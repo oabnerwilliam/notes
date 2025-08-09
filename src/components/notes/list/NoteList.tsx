@@ -4,12 +4,16 @@ import NoteCard from '../card/NoteCard'
 
 export const NoteList = ({ 
     filteredNotes, 
-    setNotes 
+    setNotes,
+    editNote,
+    deleteNote 
 }: {
     filteredNotes: Note[],
-    setNotes: (notes: Note[]) => void    
+    setNotes: (notes: Note[]) => void,
+    editNote: (note: Note) => void,
+    deleteNote: (note: Note) => void
 }) => {
-    const { deleteNote, editNote } = useNoteList({ setNotes })
+    useNoteList({ setNotes })
 
     return (
         <div 
@@ -21,7 +25,7 @@ export const NoteList = ({
                 <NoteCard 
                     note={note}
                     key={note.id}
-                    handleDelete={()=>deleteNote(note)}
+                    handleDelete={deleteNote}
                     handleSubmit={editNote}
                 />
             ))  
