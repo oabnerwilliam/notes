@@ -10,6 +10,8 @@ import SignUpPage from './components/pages/signup/SignUpPage'
 import LoginPage from './components/pages/login/LoginPage'
 import DarkButton from './components/layout/darkmode/DarkButton'
 import Accounts from './components/pages/accounts/Accounts'
+import { Suspense } from 'react'
+import Loader from './components/layout/loader/Loader'
 
 function App() {
   return (
@@ -19,7 +21,11 @@ function App() {
         <Container customClass="router">
           <Routes>
             <Route path="/" element={<Home/>}/>
-            <Route path="/mynotes" element={<MyNotes/>}/>
+            <Route path="/mynotes" element={
+              <Suspense fallback={<Loader fullScreen={true}/>}>
+                <MyNotes/>
+              </Suspense>
+            }/>
             <Route path="/signup" element={<SignUpPage/>}/>
             <Route path="/login" element={<LoginPage/>}/>
             <Route path="/accounts" element={<Accounts/>}/>

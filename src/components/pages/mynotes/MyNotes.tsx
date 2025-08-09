@@ -16,9 +16,10 @@ const MyNotes = () => {
 
   const {
     filteredNotes,
-    setNotes,
     createNote,
-    searchItem
+    editNote,
+    deleteNote,
+    searchItem,
   } = useMyNotes()
 
   return(
@@ -46,12 +47,11 @@ const MyNotes = () => {
               <NoteForm handleSubmit={createNote}/>
             </div>
             
-            <Suspense fallback={<Loader/>}>
-              <NoteList
-                filteredNotes={filteredNotes}
-                setNotes={setNotes}
-              />
-            </Suspense>
+            <NoteList
+              list={filteredNotes}
+              deleteNote={deleteNote}
+              editNote={editNote}
+            />
           </>
         ) : (
           <>
