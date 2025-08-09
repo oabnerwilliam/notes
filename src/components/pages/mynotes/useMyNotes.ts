@@ -15,9 +15,11 @@ const useMyNotes = () => {
         queryKey: ['notes'],
         queryFn: async () => await get("http://localhost:5000/notes"),
     })
-
+    
     const notes = useMemo(() => user && userFilter(data, user).slice().reverse(), [data]) ?? []
-
+    
+    const { searchItem, filtered } = useSearch(notes)
+    
 
     const createNoteMutation = useMutation({
         mutationFn: async ({ note }: { note: Note }) => await post('http://localhost:5000/notes/', note),
@@ -52,9 +54,6 @@ const useMyNotes = () => {
         deleteNoteMutation.mutate({ note })
     }
 
-
-    const { searchItem, filtered } = useSearch(notes)
-    
 
     return {
         filteredNotes: filtered,
