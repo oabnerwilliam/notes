@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react'
-import { post } from '../../../util/requests/api'
+import { post, put, remove } from '../../../util/requests/api'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useSearch } from '../../../hooks/search/useSearch'
 import { useAuth } from '../../../contexts/authContext/AuthContext'
 
-const useMyNotes = () => {
+export const useMyNotes = () => {
     const [notes, setNotes] = useState<Note[]>([])
-    const [filteredNotes, setFilteredNotes] = useState<Note[]>([])
 
     const { user } = useAuth()
 
@@ -18,6 +17,15 @@ const useMyNotes = () => {
         onSuccess: () => queryClient.invalidateQueries({ queryKey: ['notes'] })
     })
 
+    const editNoteMutation = useMutation({
+        mutationFn: async ({ note }: { note: Note }) => await put(`http://localhost:5000/notes/${note.id}`, note),
+        onSuccess: () => queryClient.invalidateQueries({ queryKey: ['notes'] })
+    })
+
+    const deleteNoteMutation = useMutation({
+        mutationFn: async ({ note }: { note: Note }) => await remove(`http://localhost:5000/notes/${note.id}`),
+        onSuccess: () => queryClient.invalidateQueries({ queryKey: ['notes'] })
+    })
 
     const createNote = async (note: Note): Promise<void> => {
         note = {
@@ -28,20 +36,24 @@ const useMyNotes = () => {
         createNoteMutation.mutate({ note })
     }
 
+    const editNote = async (note: Note): Promise<void> => {
+        editNoteMutation.mutate({ note })
+    }
+
+    const deleteNote = async (note: Note): Promise<void> => {
+        deleteNoteMutation.mutate({ note })
+    }
 
     const { searchItem, filtered } = useSearch(notes)
-
-    useEffect(()=>{
-        setFilteredNotes(filtered)
-    }, [filtered])
     
 
     return {
-        filteredNotes,
+        filteredNotes: filtered,
         setNotes,
         createNote,
-        searchItem
+        editNote,
+        deleteNote,
+        searchItem,
+        user
     }
 }
-
-export default useMyNotes
