@@ -5,15 +5,16 @@ interface SearchableItem {
     content: string;
 }
 
-type useSearchType = {
-    searchItem: (e: React.ChangeEvent<HTMLInputElement>) => void
+type useSearchType <T> = {
+    searchItem: (e: React.ChangeEvent<HTMLInputElement>) => void,
+    filtered: T[]
 }
 
 export const useSearch = <T extends SearchableItem> (
-    list: T[], 
-    setFiltered: (filteredList: T[]) => void
-): useSearchType => {
+    list: T[]
+): useSearchType <T> => {
     const [searchText, setSearchText] = useState<string>('')
+    const [filtered, setFiltered] = useState<T[]>([])
     
     useEffect(()=>{
         if (searchText) {
@@ -24,11 +25,11 @@ export const useSearch = <T extends SearchableItem> (
         } else {
             setFiltered(list)
         }
-    }, [searchText, list, setFiltered])
+    }, [searchText, list])
     
     const searchItem = (e: React.ChangeEvent<HTMLInputElement>): void => {
         setSearchText(e.target.value)
     }
   
-    return { searchItem }
+    return { searchItem, filtered }
 }
