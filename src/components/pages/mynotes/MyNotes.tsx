@@ -1,5 +1,4 @@
 import NoteForm from '../../notes/form/NoteForm'
-import NoteCard from '../../notes/card/NoteCard'
 import SearchInput from '../../form/search/SearchInput'
 
 import LinkButton from '../../layout/linkbutton/LinkButton'
@@ -7,8 +6,6 @@ import LinkButton from '../../layout/linkbutton/LinkButton'
 import { useAuth } from '../../../contexts/authContext/AuthContext'
 
 import useMyNotes from './useMyNotes'
-import Loader from '../../layout/loader/Loader'
-import { Suspense } from 'react'
 import { NoteList } from '../../notes/list/NoteList'
 
 const MyNotes = () => {

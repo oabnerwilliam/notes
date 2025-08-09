@@ -1,5 +1,3 @@
-import React from 'react'
-import { useNoteList } from './useNoteList'
 import NoteCard from '../card/NoteCard'
 
 export const NoteList = ({ 
