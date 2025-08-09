@@ -15,7 +15,7 @@ const MyNotes = () => {
     createNote,
     editNote,
     deleteNote,
-    searchItem,
+    handleSearch,
     user
   } = useMyNotes()
 
@@ -34,7 +34,7 @@ const MyNotes = () => {
               className='bg-primary text-p-text p-[.3em]'
               >Minhas Anotações</h1>
               <SearchInput
-                handleOnChange={searchItem}
+                handleOnChange={handleSearch}
                 placeholder="Pesquisar nota"
               />
             </div>

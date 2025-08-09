@@ -6,7 +6,7 @@ interface SearchableItem {
 }
 
 type useSearchType <T> = {
-    searchItem: (e: React.ChangeEvent<HTMLInputElement>) => void,
+    handleSearch: (e: React.ChangeEvent<HTMLInputElement>) => void,
     filtered: T[]
 }
 
@@ -27,9 +27,9 @@ export const useSearch = <T extends SearchableItem> (
         }
     }, [searchText, list])
     
-    const searchItem = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>): void => {
         setSearchText(e.target.value)
     }
   
-    return { searchItem, filtered }
+    return { handleSearch, filtered }
 }
