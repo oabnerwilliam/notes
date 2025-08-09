@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { post, put, remove } from '../../../util/requests/api'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useSearch } from '../../../hooks/search/useSearch'
@@ -6,11 +6,12 @@ import { useAuth } from '../../../contexts/authContext/AuthContext'
 
 export const useMyNotes = () => {
     const [notes, setNotes] = useState<Note[]>([])
+    
+    const { searchItem, filtered } = useSearch(notes)
 
     const { user } = useAuth()
 
     const queryClient = useQueryClient()
-
 
     const createNoteMutation = useMutation({
         mutationFn: async ({ note }: { note: Note }) => await post('http://localhost:5000/notes/', note),
@@ -42,10 +43,7 @@ export const useMyNotes = () => {
 
     const deleteNote = async (note: Note): Promise<void> => {
         deleteNoteMutation.mutate({ note })
-    }
-
-    const { searchItem, filtered } = useSearch(notes)
-    
+    }    
 
     return {
         filteredNotes: filtered,

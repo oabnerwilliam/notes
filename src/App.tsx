@@ -10,25 +10,30 @@ import SignUpPage from './components/pages/signup/SignUpPage'
 import LoginPage from './components/pages/login/LoginPage'
 import DarkButton from './components/layout/darkmode/DarkButton'
 import Accounts from './components/pages/accounts/Accounts'
+import { AuthProvider } from './contexts/authContext/AuthContext'
+import { Suspense } from 'react'
+import Loader from './components/layout/loader/Loader'
 
 function App() {
   return (
-    <div>
-      <Router>
-        <Navbar/>
-        <Container customClass="router">
-          <Routes>
-            <Route path="/" element={<Home/>}/>
-            <Route path="/mynotes" element={<MyNotes/>}/>
-            <Route path="/signup" element={<SignUpPage/>}/>
-            <Route path="/login" element={<LoginPage/>}/>
-            <Route path="/accounts" element={<Accounts/>}/>
-          </Routes>
-        </Container>
-        <Footer/>
-        <DarkButton/>
-      </Router>
-    </div>
+    <Suspense fallback={<Loader/>}>
+      <AuthProvider>
+        <Router>
+          <Navbar/>
+          <Container customClass="router">
+            <Routes>
+              <Route path="/" element={<Home/>}/>
+              <Route path="/mynotes" element={<MyNotes/>}/>
+              <Route path="/signup" element={<SignUpPage/>}/>
+              <Route path="/login" element={<LoginPage/>}/>
+              <Route path="/accounts" element={<Accounts/>}/>
+            </Routes>
+          </Container>
+          <Footer/>
+          <DarkButton/>
+        </Router>
+      </AuthProvider>
+    </Suspense>
   )
 }
 

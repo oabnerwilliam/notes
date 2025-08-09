@@ -1,7 +1,6 @@
-import { useMutation, useQuery } from '@tanstack/react-query'
-import { ReactNode, createContext, useContext, useEffect, useState } from 'react'
+import { useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-query'
+import { ReactNode, createContext, useContext, useMemo, useState } from 'react'
 import { get, put } from '../../util/requests/api'
-import Loader from '../../components/layout/loader/Loader'
 
 type AuthContextType = {
     user: User | null,
@@ -17,30 +16,28 @@ type AuthProviderProps = {
 const AuthContext = createContext<AuthContextType | null>(null)
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-    const [user, setUser] = useState<User | null>(null)
     const [loggedAccounts, setLoggedAccounts] = useState<User[]>([])
     
-    const { data, isLoading } = useQuery({
+    const queryClient = useQueryClient()
+
+    const { data } = useSuspenseQuery({
         queryKey: ['user'],
         queryFn: async () => await get("http://localhost:5000/loggedUser")
     })
 
-    useEffect(()=>{
-        if (data?.id) {
-            setUser(data)
-        }
-    }, [data])
+    const user = useMemo(() => data?.id && data, [data])
 
     const loginMutation = useMutation({
-        mutationFn: ({ user }: { user: User }) => put(`http://localhost:5000/loggedUser`, user)
-    })
+        mutationFn: async ({ user }: { user: User }) => await put(`http://localhost:5000/loggedUser`, user),
+        onSuccess: () => queryClient.refetchQueries({ queryKey: ['user'] })
+    }) 
 
     const logoutMutation = useMutation({
-        mutationFn: () => put(`http://localhost:5000/loggedUser`, {})
+        mutationFn: async () => await put(`http://localhost:5000/loggedUser`, {}),
+        onSuccess: () => queryClient.refetchQueries({ queryKey: ['user'] })
     })
 
     const login = (userData: User) => {
-        setUser(userData)
         loginMutation.mutate({ user: userData })
         
         const localAccounts: string | null = localStorage.getItem('loggedAccounts')
@@ -57,14 +54,13 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
 
     const logout = () => {
-        setUser(null)
         logoutMutation.mutate()
     }
 
     return (
         <AuthContext.Provider
-        value={{user, loggedAccounts, login, logout}}>
-            { !isLoading ? children : <Loader/> }
+        value={{ user, loggedAccounts, login, logout }}>
+            { children }
         </AuthContext.Provider>
     )
 }
